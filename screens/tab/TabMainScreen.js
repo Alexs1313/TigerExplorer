@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   newsContainer: {
-    padding: 5,
+    padding: 20,
     backgroundColor: 'yellow',
     borderRadius: 100,
   },
