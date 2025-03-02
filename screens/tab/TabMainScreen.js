@@ -26,7 +26,10 @@ const TabMainScreen = () => {
         </View>
       </View>
 
-      <ScrollView horizontal style={{marginHorizontal: 16}}>
+      <ScrollView
+        horizontal
+        style={{marginHorizontal: 16}}
+        showsHorizontalScrollIndicator={false}>
         {reserves.map(item => (
           <View key={item.id}>
             <View
@@ -94,7 +97,7 @@ const TabMainScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#DF9881',
+    backgroundColor: '#rgba(196, 21, 34, 1)',
   },
   title: {
     fontFamily: 'Montserrat',
@@ -108,7 +111,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 4,
   },
   reservesContainer: {
-    padding: 5,
+    padding: 20,
     backgroundColor: 'red',
     borderRadius: 100,
   },
