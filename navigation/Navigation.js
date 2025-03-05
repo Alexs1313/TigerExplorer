@@ -5,6 +5,7 @@ import TabMainScreen from '../screens/tab/TabMainScreen';
 import TabTigersScreen from '../screens/tab/TabTigersScreen';
 import TabGamesScreen from '../screens/tab/TabGamesScreen';
 import TabSettingsScreen from '../screens/tab/TabSettingsScreen';
+import DefaultMainScreen from '../screens/nested/DefaultMainScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +22,7 @@ export const Navigation = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => (
-            <View style={styles.iconContainer}>
+            <View>
               <Image
                 source={require('../assets/tabIcons/home.png')}
                 style={[

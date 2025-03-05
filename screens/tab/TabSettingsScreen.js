@@ -1,20 +1,24 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
+
+import DefaultTabSettingsScreen from '../nested/DefaultSettings';
+import NewsScreen from '../stack/ReservesDetails';
+import {Navigation} from '../../navigation/Navigation';
+
+const Stack = createStackNavigator();
 
 const TabSettingsScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text>TabSettingsScreen</Text>
-    </View>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen
+        name="DefaultTabSettingsScreen"
+        component={DefaultTabSettingsScreen}
+      />
+      <Stack.Screen name="NewsScreen" component={NewsScreen} />
+    </Stack.Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default TabSettingsScreen;

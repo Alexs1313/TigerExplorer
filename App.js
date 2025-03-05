@@ -1,16 +1,16 @@
 import {NavigationContainer} from '@react-navigation/native';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Navigation} from './navigation/Navigation';
+import 'react-native-gesture-handler';
 
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import TabMainScreen from './screens/tab/TabMainScreen';
-import TabGamesScreen from './screens/tab/TabGamesScreen';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {StrictMode} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
+import NewsScreen from './screens/stack/ReservesDetails';
+import TabSettingsScreen from './screens/tab/TabSettingsScreen';
+import Gradient from './components/RadialGradient';
+import TabMainScreen from './screens/tab/TabMainScreen';
+
+const Stack = createStackNavigator;
 
 const App = () => {
   return (
