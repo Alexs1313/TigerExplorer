@@ -1825,6 +1825,8 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNTextGradientView (0.1.7):
+    - React
   - SocketRocket (0.7.1)
   - SRSRadialGradient (1.2.1):
     - React
@@ -1906,6 +1908,7 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
+  - RNTextGradientView (from `../node_modules/react-native-text-gradient`)
   - SRSRadialGradient (from `../node_modules/react-native-radial-gradient`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -2061,6 +2064,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSVG:
     :path: "../node_modules/react-native-svg"
+  RNTextGradientView:
+    :path: "../node_modules/react-native-text-gradient"
   SRSRadialGradient:
     :path: "../node_modules/react-native-radial-gradient"
   Yoga:
@@ -2140,6 +2145,7 @@ SPEC CHECKSUMS:
   RNReanimated: 6383cd0d805e48768b97bd65bcb1d06f0e69ab8e
   RNScreens: 0d4cb9afe052607ad0aa71f645a88bb7c7f2e64c
   RNSVG: 8126581b369adf6a0004b6a6cab1a55e3002d5b0
+  RNTextGradientView: 1cba3ad0cbf7e7ded96a4ad95db9cb1fbdae937e
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   SRSRadialGradient: f93406612258ab93e454aa08b9f82d3bb7adf6c1
   Yoga: afd04ff05ebe0121a00c468a8a3c8080221cb14c
