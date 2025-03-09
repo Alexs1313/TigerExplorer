@@ -1,12 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
-import {
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+
+import GradientText from '../../components/TextGradient';
+import Gradient from '../../components/RadialGradient';
+import GoBackButton from '../../components/GoBackButton';
 
 const ReservesDetails = ({route}) => {
   const navigation = useNavigation();
@@ -14,6 +11,7 @@ const ReservesDetails = ({route}) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Gradient />
       <View
         style={{
           flexDirection: 'row',
@@ -23,14 +21,11 @@ const ReservesDetails = ({route}) => {
           marginTop: 10,
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <TouchableOpacity
-            style={styles.arrowIcon}
-            onPress={() => navigation.goBack('')}>
-            {<Image source={require('../../assets/reservesImg/arrow.png')} />}
-          </TouchableOpacity>
-          <View>
-            <Text style={styles.title}>Reserve</Text>
-          </View>
+          <GoBackButton />
+
+          <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+            Reserve
+          </GradientText>
         </View>
 
         <View style={styles.heartIcon}>
@@ -67,7 +62,7 @@ const ReservesDetails = ({route}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: '#cd5c5c'},
+  container: {flex: 1},
   title: {
     marginLeft: 16,
 
@@ -75,19 +70,11 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 28,
 
-    color: '#ffe188',
     textShadowColor: 'rgba(0, 0, 0, 0.25)',
     textShadowOffset: {width: 0, height: 4},
     textShadowRadius: 4,
   },
-  arrowIcon: {
-    width: 32,
-    height: 32,
-    backgroundColor: '#E9A90C',
-    borderRadius: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  arrowIcon: {},
   heartIcon: {
     width: 40,
     height: 40,
@@ -108,7 +95,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
     color: '#fff',
+    lineHeight: 21,
   },
+  linearGradient: {},
 });
 
 export default ReservesDetails;

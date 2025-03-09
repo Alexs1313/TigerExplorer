@@ -1,10 +1,9 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 
-import TabMainScreen from '../screens/tab/TabMainScreen';
-import TabTigersScreen from '../screens/tab/TabTigersScreen';
-import TabGamesScreen from '../screens/tab/TabGamesScreen';
-import TabSettingsScreen from '../screens/tab/TabSettingsScreen';
+import DefaultGamesScreen from '../screens/nested/DefaultGamesScreen';
+import DefaultTabSettingsScreen from '../screens/nested/DefaultSettings';
+import DefaultTigersScreen from '../screens/nested/DefaultTigerScreen';
 import DefaultMainScreen from '../screens/nested/DefaultMainScreen';
 
 const Tab = createBottomTabNavigator();
@@ -12,6 +11,7 @@ const Tab = createBottomTabNavigator();
 export const Navigation = () => {
   return (
     <Tab.Navigator
+      initialRouteName="Main"
       screenOptions={{
         tabBarStyle: styles.tabBar,
         tabBarLabelStyle: styles.tabText,
@@ -24,9 +24,9 @@ export const Navigation = () => {
           tabBarIcon: ({focused}) => (
             <View>
               <Image
-                source={require('../assets/tabIcons/home.png')}
+                source={require('../assets/tabIcons/miniHome.png')}
                 style={[
-                  styles.tabIcon,
+                  styles.tabIconMain,
                   {tintColor: focused ? '#F2EA5C' : '#fff'},
                 ]}
               />
@@ -34,55 +34,55 @@ export const Navigation = () => {
           ),
         }}
         name="Main"
-        component={TabMainScreen}
+        component={DefaultMainScreen}
       />
       <Tab.Screen
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => (
             <Image
-              source={require('../assets/tabIcons/tiger.png')}
+              source={require('../assets/tabIcons/miniTiger.png')}
               style={[
-                styles.tabIcon,
+                styles.tabIconTigers,
                 {tintColor: focused ? '#F2EA5C' : '#fff'},
               ]}
             />
           ),
         }}
         name="Tigers"
-        component={TabTigersScreen}
+        component={DefaultTigersScreen}
       />
       <Tab.Screen
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => (
             <Image
-              source={require('../assets/tabIcons/game.png')}
+              source={require('../assets/tabIcons/miniGames.png')}
               style={[
-                styles.tabIcon,
+                styles.tabIconGames,
                 {tintColor: focused ? '#F2EA5C' : '#fff'},
               ]}
             />
           ),
         }}
         name="Games"
-        component={TabGamesScreen}
+        component={DefaultGamesScreen}
       />
       <Tab.Screen
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => (
             <Image
-              source={require('../assets/tabIcons/settings.png')}
+              source={require('../assets/tabIcons/miniSett.png')}
               style={[
-                styles.tabIcon,
+                styles.tabIconSettings,
                 {tintColor: focused ? '#F2EA5C' : '#fff'},
               ]}
             />
           ),
         }}
         name="Settings"
-        component={TabSettingsScreen}
+        component={DefaultTabSettingsScreen}
       />
     </Tab.Navigator>
   );
@@ -91,7 +91,6 @@ export const Navigation = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
   },
   tabBar: {
     backgroundColor: '#D9313D',
@@ -101,11 +100,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
   },
-  tabIcon: {
-    width: 25,
-    height: 24,
-    color: '#fff',
-  },
+
   tabText: {
     fontSize: 10,
     fontWeight: '600',

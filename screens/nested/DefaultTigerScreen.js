@@ -5,46 +5,39 @@ import {
   View,
   ScrollView,
   Image,
-  Touchable,
   TouchableOpacity,
-  ImageBackground,
   Pressable,
-  FlatList,
 } from 'react-native';
-import {reserves} from '../../data/reserves';
-import {encyclopedia} from '../../data/encyclopedia';
-import LinearGradient from 'react-native-linear-gradient';
-import SegmentedControl from 'react-native-segmented-control-2';
-import GradientText from 'react-native-gradient-texts';
 import {useNavigation} from '@react-navigation/native';
-import Svg, {Defs, RadialGradient, Stop, Ellipse, Rect} from 'react-native-svg';
-import Gradient from '../../components/RadialGradient';
-import {useState} from 'react';
 
-console.log(reserves);
+import {encyclopedia} from '../../data/encyclopedia';
+import Gradient from '../../components/RadialGradient';
+import GradientText from '../../components/TextGradient';
+import {useMyContext} from '../../context/FavContext';
+import {reserves} from '../../data/reserves';
 
 const DefaultTigersScreen = () => {
   const navigation = useNavigation();
+  const {favTiger, setFavTiger} = useMyContext();
+
+  const addToFavourites = selectedCard => {
+    setFavTiger([...favTiger, selectedCard]);
+    // setToggleIcon(!toggleIcon);
+    console.log(selectedCard);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
+      <Gradient />
       <View
         style={{
           marginTop: 10,
           width: 297,
           marginHorizontal: 20,
         }}>
-        {/* <GradientText
-          text={'Reserves and Volunteering'}
-          fontSize={30}
-          isGradientFill
-          gradientColors={['#F2EA5C', '#E9A90C']}
-          fontFamily={'Montserrat'}
-          start={{x: 1, y: 0}}
-          style={styles.title}
-        /> */}
-
-        <Text style={styles.title}>Encyclopedia of Tigers</Text>
+        <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+          Encyclopedia of Tigers
+        </GradientText>
       </View>
 
       <ScrollView
@@ -75,9 +68,11 @@ const DefaultTigersScreen = () => {
                     alignItems: 'center',
                   }}>
                   {
-                    <Image
-                      source={require('../../assets/reservesImg/heart.png')}
-                    />
+                    <TouchableOpacity onPress={() => addToFavourites(item)}>
+                      <Image
+                        source={require('../../assets/reservesImg/heart.png')}
+                      />
+                    </TouchableOpacity>
                   }
                 </View>
               </Pressable>
@@ -105,17 +100,12 @@ const DefaultTigersScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
   },
   title: {
     fontWeight: '800',
     fontSize: 28,
     lineHeight: 36,
-    color: '#ffe188',
 
-    textShadowColor: 'rgba(0, 0, 0, 0.25)',
-    textShadowOffset: {width: 0, height: 4},
-    textShadowRadius: 4,
     marginBottom: 37,
     marginTop: 10,
   },
@@ -124,12 +114,9 @@ const styles = StyleSheet.create({
     color: ' rgba(255, 255, 255, 1)',
     fontWeight: '700',
     fontSize: 20,
-
-    fontFamily: 'Montserrat',
     marginLeft: 16,
     marginBottom: 6,
   },
-
   AboutText: {
     fontSize: 12,
     fontWeight: '400',

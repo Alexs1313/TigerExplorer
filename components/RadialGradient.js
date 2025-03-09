@@ -11,8 +11,17 @@ import Svg, {
 
 const Gradient = () => {
   return (
-    <View style={styles.container}>
-      <Svg height="100%" width="100%">
+    <View style={StyleSheet.absoluteFill}>
+      <Svg
+        height="100%"
+        width="100%"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+        }}>
         <Defs>
           <RadialGradient
             id="grad"

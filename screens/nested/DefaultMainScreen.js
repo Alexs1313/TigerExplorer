@@ -15,31 +15,43 @@ import {reserves} from '../../data/reserves';
 import {news} from '../../data/news';
 import LinearGradient from 'react-native-linear-gradient';
 import SegmentedControl from 'react-native-segmented-control-2';
-import GradientText from 'react-native-gradient-texts';
+
 import {useNavigation} from '@react-navigation/native';
 import Svg, {Defs, RadialGradient, Stop, Ellipse, Rect} from 'react-native-svg';
 import Gradient from '../../components/RadialGradient';
-import {useState} from 'react';
+import {useContext, useState} from 'react';
+import GradientText from '../../components/TextGradient';
+import {useMyContext} from '../../context/FavContext';
 
 console.log(reserves);
 
 const DefaultMainScreen = () => {
   const [selectedIdx, setSelectedIdx] = useState(0);
+  const [toggleIcon, setToggleIcon] = useState(false);
   const navigation = useNavigation();
+  const {carts, setCarts} = useMyContext();
+  console.log('carts', carts);
+
+  const addToFavourites = selectedCard => {
+    // carts.map(cart=>{
+    //   if(cart.id !== selectedCard)
+    // })
+
+    setCarts([...carts, selectedCard]);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <GradientText
-        text={'Reserves and Volunteerings'}
-        fontSize={30}
-        isGradientFill
-        gradientColors={['#F2EA5C', '#E9A90C']}
-        fontFamily={'Montserrat'}
-        start={{x: 1, y: 0}}
-      /> */}
+      <Gradient />
 
-      <View style={{marginTop: 10, marginHorizontal: 20}}>
-        <Text style={styles.title}>Reserves and Volunteering</Text>
+      <View
+        style={{
+          marginTop: 10,
+          marginHorizontal: 20,
+        }}>
+        <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+          Reserves and Volunteering
+        </GradientText>
       </View>
 
       <SegmentedControl
@@ -61,6 +73,7 @@ const DefaultMainScreen = () => {
 
           textShadowColor: 'rgba(0, 0, 0, 0.04)',
           textShadowOffset: {width: 0, height: 3},
+
           textShadowRadius: 8,
         }}
         onChange={index => setSelectedIdx(index)}
@@ -83,7 +96,7 @@ const DefaultMainScreen = () => {
                   }>
                   <Image style={styles.mainImage} source={item.image} />
                 </Pressable>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => addToFavourites(item)}>
                   <View
                     style={{
                       position: 'absolute',
@@ -96,11 +109,15 @@ const DefaultMainScreen = () => {
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}>
-                    {
+                    {toggleIcon ? (
+                      <Image
+                        source={require('../../assets/settingsImg/checkedHeart.png')}
+                      />
+                    ) : (
                       <Image
                         source={require('../../assets/reservesImg/heart.png')}
                       />
-                    }
+                    )}
                   </View>
                 </TouchableOpacity>
                 <View
@@ -188,7 +205,6 @@ const DefaultMainScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
   },
   linearGradient: {
     flex: 1,
@@ -197,10 +213,6 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 28,
     lineHeight: 36,
-    color: '#ffe188',
-    textShadowColor: 'rgba(0, 0, 0, 0.25)',
-    textShadowOffset: {width: 0, height: 4},
-    textShadowRadius: 4,
   },
   reservesContainer: {
     padding: 20,

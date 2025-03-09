@@ -1,4 +1,3 @@
-import {useNavigation} from '@react-navigation/native';
 import {
   Image,
   SafeAreaView,
@@ -8,13 +7,26 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {useState} from 'react';
+
+import GradientText from '../../components/TextGradient';
+import Gradient from '../../components/RadialGradient';
+import {useMyContext} from '../../context/FavContext';
+import GoBackButton from '../../components/GoBackButton';
 
 const NewsDetails = ({route}) => {
-  const navigation = useNavigation();
+  const [toggleIcon, setToggleIcon] = useState(true);
+
+  const {favNews, setFavNews} = useMyContext();
   const item = route.params;
+
+  const addToFavouritesNews = selectedCard => {
+    setFavNews([...favNews, selectedCard]);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
+      <Gradient />
       <View
         style={{
           flexDirection: 'row',
@@ -24,19 +36,23 @@ const NewsDetails = ({route}) => {
           marginTop: 10,
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <TouchableOpacity
-            style={styles.arrowIcon}
-            onPress={() => navigation.goBack('')}>
-            {<Image source={require('../../assets/reservesImg/arrow.png')} />}
-          </TouchableOpacity>
-          <View>
-            <Text style={styles.title}>News</Text>
-          </View>
+          <GoBackButton />
+          <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+            News
+          </GradientText>
         </View>
 
-        <View style={styles.heartIcon}>
-          {<Image source={require('../../assets/reservesImg/heart.png')} />}
-        </View>
+        <TouchableOpacity
+          onPress={() => addToFavouritesNews(item)}
+          style={styles.heartIcon}>
+          {toggleIcon ? (
+            <Image source={require('../../assets/reservesImg/heart.png')} />
+          ) : (
+            <Image
+              source={require('../../assets/settingsImg/checkedHeart.png')}
+            />
+          )}
+        </TouchableOpacity>
       </View>
       <View style={{marginHorizontal: 16, marginTop: 16, marginBottom: 24}}>
         <Image source={item.item.image} style={styles.mainImage} />
@@ -59,7 +75,6 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 28,
 
-    color: '#ffe188',
     textShadowColor: 'rgba(0, 0, 0, 0.25)',
     textShadowOffset: {width: 0, height: 4},
     textShadowRadius: 4,

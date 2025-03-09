@@ -1,20 +1,21 @@
-import {useNavigation} from '@react-navigation/native';
 import {
   Image,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
+import Gradient from '../../components/RadialGradient';
+import GoBackButton from '../../components/GoBackButton';
+
 const TigerDetails = ({route}) => {
-  const navigation = useNavigation();
   const item = route.params;
 
   return (
     <SafeAreaView style={styles.container}>
+      <Gradient />
       <View
         style={{
           flexDirection: 'row',
@@ -24,11 +25,7 @@ const TigerDetails = ({route}) => {
           marginTop: 10,
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <TouchableOpacity
-            style={styles.arrowIcon}
-            onPress={() => navigation.goBack('')}>
-            {<Image source={require('../../assets/reservesImg/arrow.png')} />}
-          </TouchableOpacity>
+          <GoBackButton />
           <View>
             <Text style={styles.title}>News</Text>
           </View>

@@ -9,14 +9,26 @@ import {
   Text,
   View,
 } from 'react-native';
+import Gradient from '../../components/RadialGradient';
+import GradientText from '../../components/TextGradient';
 
 const DefaultGamesScreen = () => {
   const navigation = useNavigation();
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
-        <Text style={styles.title}>Tiger’s games</Text>
+      <Gradient />
+      <View
+        style={{
+          textShadowColor: 'rgba(0, 0, 0, 0.25)',
+          textShadowOffset: {width: 0, height: 4},
+          textShadowRadius: 4,
+        }}>
+        <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+          Tiger’s games
+        </GradientText>
+      </View>
+      <ScrollView style={{marginBottom: 80}}>
         <View>
           <Image
             style={{marginHorizontal: 16}}
@@ -89,15 +101,12 @@ const DefaultGamesScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: 'red', marginBottom: 100},
+  container: {flex: 1},
   title: {
     fontWeight: '800',
     fontSize: 28,
     lineHeight: 36,
-    color: '#ffe188',
-    textShadowColor: 'rgba(0, 0, 0, 0.25)',
-    textShadowOffset: {width: 0, height: 4},
-    textShadowRadius: 4,
+
     marginLeft: 20,
     marginBottom: 20,
     marginTop: 10,
