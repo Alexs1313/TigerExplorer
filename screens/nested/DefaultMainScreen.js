@@ -5,40 +5,41 @@ import {
   View,
   ScrollView,
   Image,
-  Touchable,
   TouchableOpacity,
-  ImageBackground,
   Pressable,
-  FlatList,
 } from 'react-native';
 import {reserves} from '../../data/reserves';
 import {news} from '../../data/news';
-import LinearGradient from 'react-native-linear-gradient';
+
 import SegmentedControl from 'react-native-segmented-control-2';
 
 import {useNavigation} from '@react-navigation/native';
-import Svg, {Defs, RadialGradient, Stop, Ellipse, Rect} from 'react-native-svg';
+
 import Gradient from '../../components/RadialGradient';
-import {useContext, useState} from 'react';
+import {useEffect, useState} from 'react';
 import GradientText from '../../components/TextGradient';
 import {useMyContext} from '../../context/FavContext';
-
-console.log(reserves);
+import MainTigerCard from '../../components/MainTigerCard';
 
 const DefaultMainScreen = () => {
   const [selectedIdx, setSelectedIdx] = useState(0);
-  const [toggleIcon, setToggleIcon] = useState(false);
+
+  // const [isSelected, setIsSelected] = useState(0);
+
   const navigation = useNavigation();
   const {carts, setCarts} = useMyContext();
-  console.log('carts', carts);
 
-  const addToFavourites = selectedCard => {
-    // carts.map(cart=>{
-    //   if(cart.id !== selectedCard)
-    // })
+  // const addToFavourites = selectedCard => {
+  //   // setIsSelected(selectedCard.id);
 
-    setCarts([...carts, selectedCard]);
-  };
+  //   const setFavourite = carts.find(item => item.id === selectedCard.id);
+  //   if (!setFavourite) {
+  //     setCarts([...carts, selectedCard]);
+
+  //     console.log(isSelected);
+  //   }
+  //   return;
+  // };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -48,6 +49,14 @@ const DefaultMainScreen = () => {
         style={{
           marginTop: 10,
           marginHorizontal: 20,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 4,
+          },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+          elevation: 4,
         }}>
         <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
           Reserves and Volunteering
@@ -85,85 +94,87 @@ const DefaultMainScreen = () => {
           style={{paddingHorizontal: 16}}
           showsHorizontalScrollIndicator={false}>
           {reserves.map((item, idx) => (
-            <View key={item.id}>
-              <View
-                style={{
-                  marginRight: 8,
-                }}>
-                <Pressable
-                  onPress={() =>
-                    navigation.navigate('ReservesDetails', {item})
-                  }>
-                  <Image style={styles.mainImage} source={item.image} />
-                </Pressable>
-                <TouchableOpacity onPress={() => addToFavourites(item)}>
-                  <View
-                    style={{
-                      position: 'absolute',
-                      bottom: 21,
-                      right: 8,
-                      width: 40,
-                      height: 40,
-                      backgroundColor: '#2A2A2A',
-                      borderRadius: 100,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
-                    {toggleIcon ? (
-                      <Image
-                        source={require('../../assets/settingsImg/checkedHeart.png')}
-                      />
-                    ) : (
-                      <Image
-                        source={require('../../assets/reservesImg/heart.png')}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-                <View
-                  style={{
-                    position: 'absolute',
-                    borderColorColor: 'rgba(255, 255, 255, 0.8)',
-                    paddingHorizontal: 5,
-                    bottom: 21,
-                  }}>
-                  <Text style={styles.itemTitle}>{item.title} </Text>
-                  <View style={{marginLeft: 16, marginRight: 60}}>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                      }}>
-                      {
-                        <Image
-                          source={require('../../assets/reservesImg/map-pin.png')}
-                        />
-                      }
-                      <Text
-                        style={{
-                          fontSize: 12,
-                          fontWeight: '400',
-                          color: 'rgba(255, 255, 255, 0.8)',
-                          marginVertical: 8,
-                          marginLeft: 4,
-                        }}>
-                        {item.location}
-                      </Text>
-                    </View>
+            <MainTigerCard item={item} key={item.id} />
 
-                    <Text
-                      style={{
-                        fontSize: 12,
-                        fontWeight: '400',
-                        color: '#FFFFFF',
-                      }}
-                      numberOfLines={1}>
-                      {item.aboutText}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </View>
+            // <View key={item.id}>
+            //   <View
+            //     style={{
+            //       marginRight: 8,
+            //     }}>
+            //     <Pressable
+            //       onPress={() =>
+            //         navigation.navigate('ReservesDetails', {item})
+            //       }>
+            //       <Image style={styles.mainImage} source={item.image} />
+            //     </Pressable>
+            //     <TouchableOpacity onPress={() => addToFavourites(item)}>
+            //       <View
+            //         style={{
+            //           position: 'absolute',
+            //           bottom: 21,
+            //           right: 8,
+            //           width: 40,
+            //           height: 40,
+            //           backgroundColor: '#2A2A2A',
+            //           borderRadius: 100,
+            //           justifyContent: 'center',
+            //           alignItems: 'center',
+            //         }}>
+            //         {isSelected === item.id ? (
+            //           <Image
+            //             source={require('../../assets/settingsImg/checkedHeart.png')}
+            //           />
+            //         ) : (
+            //           <Image
+            //             source={require('../../assets/reservesImg/heart.png')}
+            //           />
+            //         )}
+            //       </View>
+            //     </TouchableOpacity>
+            //     <View
+            //       style={{
+            //         position: 'absolute',
+            //         borderColorColor: 'rgba(255, 255, 255, 0.8)',
+            //         paddingHorizontal: 5,
+            //         bottom: 21,
+            //       }}>
+            //       <Text style={styles.itemTitle}>{item.title} </Text>
+            //       <View style={{marginLeft: 16, marginRight: 60}}>
+            //         <View
+            //           style={{
+            //             flexDirection: 'row',
+            //             alignItems: 'center',
+            //           }}>
+            //           {
+            //             <Image
+            //               source={require('../../assets/reservesImg/map-pin.png')}
+            //             />
+            //           }
+            //           <Text
+            //             style={{
+            //               fontSize: 12,
+            //               fontWeight: '400',
+            //               color: 'rgba(255, 255, 255, 0.8)',
+            //               marginVertical: 8,
+            //               marginLeft: 4,
+            //             }}>
+            //             {item.location}
+            //           </Text>
+            //         </View>
+
+            //         <Text
+            //           style={{
+            //             fontSize: 12,
+            //             fontWeight: '400',
+            //             color: '#FFFFFF',
+            //           }}
+            //           numberOfLines={1}>
+            //           {item.aboutText}
+            //         </Text>
+            //       </View>
+            //     </View>
+            //   </View>
+            // </View>
           ))}
         </ScrollView>
       ) : (

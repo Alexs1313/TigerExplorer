@@ -50,9 +50,21 @@ const HuntingQuiz = () => {
           marginTop: 10,
         }}>
         <GoBackButton />
-        <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
-          Tiger Hunting
-        </GradientText>
+        <View
+          style={{
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 4,
+            },
+            shadowOpacity: 0.1,
+            shadowRadius: 4,
+            elevation: 4,
+          }}>
+          <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+            Tiger Hunting
+          </GradientText>
+        </View>
       </View>
       <Image
         source={quizHunting[currentQuestionIdx].image}
@@ -114,10 +126,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat',
     fontWeight: '800',
     fontSize: 28,
-
-    textShadowColor: 'rgba(0, 0, 0, 0.25)',
-    textShadowOffset: {width: 0, height: 4},
-    textShadowRadius: 4,
   },
   btnContainer: {
     width: 24,

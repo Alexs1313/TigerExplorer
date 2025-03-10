@@ -17,7 +17,13 @@ const FaqScreen = () => {
           alignItems: 'center',
           marginHorizontal: 16,
         }}>
-        <View style={{flexDirection: 'row'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            textShadowColor: 'rgba(0, 0, 0, 0.25)',
+            textShadowOffset: {width: 0, height: 4},
+            textShadowRadius: 4,
+          }}>
           <GoBackButton />
           <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
             FAQ
@@ -36,11 +42,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat',
     fontWeight: '800',
     fontSize: 28,
-
-    color: '#ffe188',
-    textShadowColor: 'rgba(0, 0, 0, 0.25)',
-    textShadowOffset: {width: 0, height: 4},
-    textShadowRadius: 4,
   },
   arrowIcon: {
     width: 32,

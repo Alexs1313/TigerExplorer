@@ -31,9 +31,23 @@ const SpotTheDifference = () => {
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <GoBackButton />
           <View>
-            <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
-              Spot the difference
-            </GradientText>
+            <View
+              style={{
+                shadowColor: '#000',
+                shadowOffset: {
+                  width: 0,
+                  height: 4,
+                },
+                shadowOpacity: 0.1,
+                shadowRadius: 4,
+                elevation: 4,
+              }}>
+              <GradientText
+                colors={['#F2EA5C', '#E9A90C']}
+                style={styles.title}>
+                Spot the difference
+              </GradientText>
+            </View>
           </View>
         </View>
       </View>
@@ -115,10 +129,8 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 28,
     lineHeight: 36,
-
     marginLeft: 20,
     marginBottom: 20,
-
     paddingTop: 15,
   },
   btnContainer: {
@@ -130,14 +142,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 12,
     bottom: 0,
-  },
-  arrowIcon: {
-    width: 32,
-    height: 32,
-    backgroundColor: '#E9A90C',
-    borderRadius: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });
 

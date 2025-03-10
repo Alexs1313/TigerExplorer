@@ -1,6 +1,6 @@
 export const reserves = [
   {
-    id: '1',
+    id: 1,
     image: require('../assets/reservesImg/IMG.png'),
     imageDetails: require('../assets/reservesImg/reservesDetails.png'),
     title: 'Tiger Sanctuary in Sundarbans',
@@ -10,7 +10,7 @@ export const reserves = [
 Visitors can participate in various conservation programs, including guided tours that educate about tiger behavior and habitat preservation. Engaging with local conservationists, guests can learn how to contribute to the protection of these endangered animals. By supporting eco-friendly initiatives, you can play a vital role in ensuring the survival of the tigers and their natural environment.`,
   },
   {
-    id: '2',
+    id: 2,
     image: require('../assets/reservesImg/IMG2.png'),
     imageDetails: require('../assets/reservesImg/reservesDetails2.png'),
     title: 'Bandhavgarh National Park',
@@ -20,7 +20,7 @@ Visitors can participate in various conservation programs, including guided tour
 By participating in these initiatives, you not only witness the beauty of wildlife but also contribute to the preservation of this vital ecosystem. Join us in our efforts to safeguard the future of tigers at Bandhavgarh!`,
   },
   {
-    id: '3',
+    id: 3,
     image: require('../assets/reservesImg/IMG3.png'),
     imageDetails: require('../assets/reservesImg/reservesDetails3.png'),
     title: 'Ranthambore National Park',
@@ -30,7 +30,7 @@ By participating in these initiatives, you not only witness the beauty of wildli
 Additionally, the park promotes conservation efforts through various programs aimed at protecting the tiger population and their habitats. Engaging with local conservation initiatives allows visitors to contribute to the preservation of this vital ecosystem.`,
   },
   {
-    id: '4',
+    id: 4,
     image: require('../assets/reservesImg/IMG4.png'),
     imageDetails: require('../assets/reservesImg/reservesDetails4.png'),
     title: 'Jim Corbett National Park',

@@ -39,9 +39,23 @@ const SpotLevelTwo = () => {
             }}>
             <GoBackButton />
 
-            <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
-              LVL 2
-            </GradientText>
+            <View
+              style={{
+                shadowColor: '#000',
+                shadowOffset: {
+                  width: 0,
+                  height: 4,
+                },
+                shadowOpacity: 0.1,
+                shadowRadius: 4,
+                elevation: 4,
+              }}>
+              <GradientText
+                colors={['#F2EA5C', '#E9A90C']}
+                style={styles.title}>
+                LVL 2
+              </GradientText>
+            </View>
           </View>
 
           <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
@@ -255,19 +269,12 @@ const styles = StyleSheet.create({
   container: {flex: 1, backgroundColor: 'red'},
   title: {
     marginLeft: 16,
-
-    fontFamily: 'Montserrat',
     fontWeight: '800',
     fontSize: 28,
-
-    textShadowColor: 'rgba(0, 0, 0, 0.25)',
-    textShadowOffset: {width: 0, height: 4},
-    textShadowRadius: 4,
   },
   arrowIcon: {
     width: 32,
     height: 32,
-    backgroundColor: '#E9A90C',
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',

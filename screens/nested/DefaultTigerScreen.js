@@ -15,16 +15,20 @@ import Gradient from '../../components/RadialGradient';
 import GradientText from '../../components/TextGradient';
 import {useMyContext} from '../../context/FavContext';
 import {reserves} from '../../data/reserves';
+import EncyclopediaTigerCard from '../../components/EncyclopediaTigerCard';
 
 const DefaultTigersScreen = () => {
-  const navigation = useNavigation();
-  const {favTiger, setFavTiger} = useMyContext();
+  // const navigation = useNavigation();
+  //  const [isSelected, setIsSelected] = useState(0);
+  // const {favTiger, setFavTiger} = useMyContext();
 
-  const addToFavourites = selectedCard => {
-    setFavTiger([...favTiger, selectedCard]);
-    // setToggleIcon(!toggleIcon);
-    console.log(selectedCard);
-  };
+  // const addToFavourites = selectedCard => {
+  //   const setFavourite = favTiger.find(item => item.id === selectedCard.id);
+  //   if (!setFavourite) {
+  //     setFavTiger([...favTiger, selectedCard]);
+  //   }
+  //   return;
+  // };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -34,6 +38,14 @@ const DefaultTigersScreen = () => {
           marginTop: 10,
           width: 297,
           marginHorizontal: 20,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 4,
+          },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+          elevation: 4,
         }}>
         <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
           Encyclopedia of Tigers
@@ -45,52 +57,53 @@ const DefaultTigersScreen = () => {
         style={{paddingHorizontal: 16}}
         showsHorizontalScrollIndicator={false}>
         {encyclopedia.map((item, idx) => (
-          <View key={item.id}>
-            <View
-              style={{
-                marginRight: 8,
-              }}>
-              <Pressable
-                onPress={() => navigation.navigate('TigerDetails', {item})}>
-                <Image style={styles.mainImage} source={item.image} />
-              </Pressable>
-              <Pressable>
-                <View
-                  style={{
-                    position: 'absolute',
-                    bottom: 21,
-                    right: 8,
-                    width: 40,
-                    height: 40,
-                    backgroundColor: '#2A2A2A',
-                    borderRadius: 100,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  {
-                    <TouchableOpacity onPress={() => addToFavourites(item)}>
-                      <Image
-                        source={require('../../assets/reservesImg/heart.png')}
-                      />
-                    </TouchableOpacity>
-                  }
-                </View>
-              </Pressable>
-              <View
-                style={{
-                  position: 'absolute',
-                  bottom: 16,
-                  marginRight: 12,
-                }}>
-                <Text style={styles.itemTitle}>{item.title} </Text>
-                <View style={{marginLeft: 16, marginRight: 60}}>
-                  <Text style={styles.AboutText} numberOfLines={3}>
-                    {item.aboutText}
-                  </Text>
-                </View>
-              </View>
-            </View>
-          </View>
+          <EncyclopediaTigerCard item={item} />
+          // <View key={item.id}>
+          //   <View
+          //     style={{
+          //       marginRight: 8,
+          //     }}>
+          //     <Pressable
+          //       onPress={() => navigation.navigate('TigerDetails', {item})}>
+          //       <Image style={styles.mainImage} source={item.image} />
+          //     </Pressable>
+          //     <Pressable>
+          //       <View
+          //         style={{
+          //           position: 'absolute',
+          //           bottom: 21,
+          //           right: 8,
+          //           width: 40,
+          //           height: 40,
+          //           backgroundColor: '#2A2A2A',
+          //           borderRadius: 100,
+          //           justifyContent: 'center',
+          //           alignItems: 'center',
+          //         }}>
+          //         {
+          //           <TouchableOpacity onPress={() => addToFavourites(item)}>
+          //             <Image
+          //               source={require('../../assets/reservesImg/heart.png')}
+          //             />
+          //           </TouchableOpacity>
+          //         }
+          //       </View>
+          //     </Pressable>
+          //     <View
+          //       style={{
+          //         position: 'absolute',
+          //         bottom: 16,
+          //         marginRight: 12,
+          //       }}>
+          //       <Text style={styles.itemTitle}>{item.title} </Text>
+          //       <View style={{marginLeft: 16, marginRight: 60}}>
+          //         <Text style={styles.AboutText} numberOfLines={3}>
+          //           {item.aboutText}
+          //         </Text>
+          //       </View>
+          //     </View>
+          //   </View>
+          // </View>
         ))}
       </ScrollView>
     </SafeAreaView>

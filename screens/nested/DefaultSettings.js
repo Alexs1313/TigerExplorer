@@ -20,9 +20,21 @@ const DefaultTabSettingsScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Gradient />
-      <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
-        Settings
-      </GradientText>
+      <View
+        style={{
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 4,
+          },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+          elevation: 4,
+        }}>
+        <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+          Settings
+        </GradientText>
+      </View>
       <ScrollView>
         <View style={{marginHorizontal: 16}}>
           <LinearGradient
@@ -127,10 +139,6 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 28,
     lineHeight: 36,
-    color: '#ffe188',
-    textShadowColor: 'rgba(0, 0, 0, 0.25)',
-    textShadowOffset: {width: 0, height: 4},
-    textShadowRadius: 4,
     marginLeft: 20,
     marginBottom: 20,
     marginTop: 10,
@@ -138,7 +146,6 @@ const styles = StyleSheet.create({
   linearGradient: {
     height: 120,
     width: 358,
-    backgroundColor: 'yellow',
     borderRadius: 24,
     marginBottom: 24,
   },

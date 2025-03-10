@@ -28,9 +28,21 @@ const Quiz = () => {
           marginTop: 10,
         }}>
         <GoBackButton />
-        <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
-          Quizzes
-        </GradientText>
+        <View
+          style={{
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 4,
+            },
+            shadowOpacity: 0.1,
+            shadowRadius: 4,
+            elevation: 4,
+          }}>
+          <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+            Quizzes
+          </GradientText>
+        </View>
       </View>
 
       <ScrollView>
@@ -113,15 +125,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat',
     fontWeight: '800',
     fontSize: 28,
-
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 3,
   },
   btnContainer: {
     width: 24,

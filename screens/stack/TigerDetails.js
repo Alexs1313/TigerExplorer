@@ -9,6 +9,7 @@ import {
 
 import Gradient from '../../components/RadialGradient';
 import GoBackButton from '../../components/GoBackButton';
+import GradientText from '../../components/TextGradient';
 
 const TigerDetails = ({route}) => {
   const item = route.params;
@@ -26,8 +27,20 @@ const TigerDetails = ({route}) => {
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <GoBackButton />
-          <View>
-            <Text style={styles.title}>News</Text>
+          <View
+            style={{
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 0.1,
+              shadowRadius: 4,
+              elevation: 4,
+            }}>
+            <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+              News
+            </GradientText>
           </View>
         </View>
 
@@ -55,16 +68,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Montserrat',
     fontWeight: '800',
     fontSize: 28,
-
-    color: '#ffe188',
-    textShadowColor: 'rgba(0, 0, 0, 0.25)',
-    textShadowOffset: {width: 0, height: 4},
-    textShadowRadius: 4,
   },
   arrowIcon: {
     width: 32,
     height: 32,
-    backgroundColor: '#E9A90C',
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',

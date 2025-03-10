@@ -22,10 +22,21 @@ const ReservesDetails = ({route}) => {
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <GoBackButton />
-
-          <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
-            Reserve
-          </GradientText>
+          <View
+            style={{
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 0.1,
+              shadowRadius: 4,
+              elevation: 4,
+            }}>
+            <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+              Reserve
+            </GradientText>
+          </View>
         </View>
 
         <View style={styles.heartIcon}>
@@ -65,16 +76,9 @@ const styles = StyleSheet.create({
   container: {flex: 1},
   title: {
     marginLeft: 16,
-
-    fontFamily: 'Montserrat',
     fontWeight: '800',
     fontSize: 28,
-
-    textShadowColor: 'rgba(0, 0, 0, 0.25)',
-    textShadowOffset: {width: 0, height: 4},
-    textShadowRadius: 4,
   },
-  arrowIcon: {},
   heartIcon: {
     width: 40,
     height: 40,
@@ -83,7 +87,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  mainImage: {},
   titleName: {
     marginLeft: 16,
     fontSize: 24,
@@ -97,7 +100,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     lineHeight: 21,
   },
-  linearGradient: {},
 });
 
 export default ReservesDetails;

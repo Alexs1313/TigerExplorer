@@ -15,13 +15,19 @@ import {useMyContext} from '../../context/FavContext';
 import GoBackButton from '../../components/GoBackButton';
 
 const NewsDetails = ({route}) => {
-  const [toggleIcon, setToggleIcon] = useState(true);
-
   const {favNews, setFavNews} = useMyContext();
   const item = route.params;
 
-  const addToFavouritesNews = selectedCard => {
-    setFavNews([...favNews, selectedCard]);
+  const [isSelected, setIsSelected] = useState(false);
+
+  const addToFavourites = selectedCard => {
+    console.log(selectedCard.item);
+    setIsSelected(true);
+    const setFavourite = favNews.find(item => item.id === selectedCard.item.id);
+    if (!setFavourite) {
+      setFavNews([...favNews, selectedCard.item]);
+    }
+    return;
   };
 
   return (
@@ -37,20 +43,32 @@ const NewsDetails = ({route}) => {
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <GoBackButton />
-          <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
-            News
-          </GradientText>
+          <View
+            style={{
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 0.1,
+              shadowRadius: 4,
+              elevation: 4,
+            }}>
+            <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+              News
+            </GradientText>
+          </View>
         </View>
 
         <TouchableOpacity
-          onPress={() => addToFavouritesNews(item)}
+          onPress={() => addToFavourites(item)}
           style={styles.heartIcon}>
-          {toggleIcon ? (
-            <Image source={require('../../assets/reservesImg/heart.png')} />
-          ) : (
+          {isSelected ? (
             <Image
               source={require('../../assets/settingsImg/checkedHeart.png')}
             />
+          ) : (
+            <Image source={require('../../assets/reservesImg/heart.png')} />
           )}
         </TouchableOpacity>
       </View>
@@ -67,25 +85,11 @@ const NewsDetails = ({route}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: '#cd5c5c'},
+  container: {flex: 1},
   title: {
     marginLeft: 16,
-
-    fontFamily: 'Montserrat',
     fontWeight: '800',
     fontSize: 28,
-
-    textShadowColor: 'rgba(0, 0, 0, 0.25)',
-    textShadowOffset: {width: 0, height: 4},
-    textShadowRadius: 4,
-  },
-  arrowIcon: {
-    width: 32,
-    height: 32,
-    backgroundColor: '#E9A90C',
-    borderRadius: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   heartIcon: {
     width: 40,
@@ -95,12 +99,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  mainImage: {},
   titleName: {
     marginLeft: 16,
     fontSize: 24,
     fontWeight: '700',
     color: '#fff',
+    marginBottom: 12,
   },
   aboutText: {
     marginLeft: 16,

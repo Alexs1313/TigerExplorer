@@ -279,17 +279,37 @@
 //   const [zones, setZones] = React.useState([
 //     {
 //       id: 1,
-//       text: 'Test zone 1',
-//       items: [{id: 5, text: 'Test existing item 5'}],
+//       text: '',
+//       // items: [{id: 5, text: 'Test existing item 5'}],
 //     },
 //     {
 //       id: 2,
-//       text: 'Test zone 2',
+//       text: '',
+//     },
+//     {
+//       id: 3,
+//       text: '',
+//     },
+//     {
+//       id: 4,
+//       text: '',
 //     },
 //   ]);
 
 //   return (
 //     <DragAndDrop
+//       renderZone={(zone, children, hover) => {
+//         return (
+//           <View
+//             style={{
+//               ...styles.dragZoneStyle,
+//               backgroundColor: hover ? '#E2E2E2' : '#FFF',
+//             }}>
+//             <Text stylae={styles.dragZoneTextStyle}>{zone.text}</Text>
+//             {children}
+//           </View>
+//         );
+//       }}
 //       style={styles.container}
 //       contentContainerStyle={styles.contentContainerStyle}
 //       itemKeyExtractor={item => item.id}
@@ -306,20 +326,8 @@
 //       renderItem={item => {
 //         return (
 //           <View style={styles.dragItemStyle}>
-//             <Text style={styles.dragItemTextStyle}>{item.text}</Text>
-//             <Image style={{width: 40, height: 40}} source={item.image} />
-//           </View>
-//         );
-//       }}
-//       renderZone={(zone, children, hover) => {
-//         return (
-//           <View
-//             style={{
-//               ...styles.dragZoneStyle,
-//               backgroundColor: hover ? '#E2E2E2' : '#FFF',
-//             }}>
-//             <Text stylae={styles.dragZoneTextStyle}>{zone.text}</Text>
-//             {children}
+//             <Text style={styles.dragItemTextStyle}></Text>
+//             <Image style={{width: 50, height: 50}} source={item.image} />
 //           </View>
 //         );
 //       }}
@@ -331,9 +339,9 @@
 //   container: {
 //     flex: 1,
 //   },
-//   itemsInZoneStyle: {
-//     width: '100%',
-//   },
+//   // itemsInZoneStyle: {
+//   //   width: '100%',
+//   // },
 //   contentContainerStyle: {
 //     padding: 20,
 //     paddingTop: 40,
@@ -350,14 +358,13 @@
 //     justifyContent: 'space-between',
 //   },
 //   dragItemStyle: {
-//     borderColor: 'red',
 //     borderWidth: 1,
-//     width: '47%',
 //     alignItems: 'center',
 //     justifyContent: 'center',
 //     marginVertical: 5,
 //     backgroundColor: '#F5F5F5',
-//     padding: 10,
+//     width: 50,
+//     height: 50,
 //   },
 //   dragItemTextStyle: {
 //     color: '#011F3B',
@@ -367,9 +374,8 @@
 //   dragZoneStyle: {
 //     borderColor: '#F39200',
 //     borderWidth: 1,
-//     width: '47%',
-//     padding: 15,
-//     minHeight: 130,
+//     width: 100,
+//     height: 50,
 //     marginVertical: 15,
 //   },
 //   dragZoneTextStyle: {
@@ -484,53 +490,100 @@
 //-------------------------------------------------------.....
 
 import {useState} from 'react';
-import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
-const Puzzles = () => {
-  const [isChecked, setIsChecked] = useState(false);
-  const [chooseZone, setChooseZone] = useState(false);
+import {news} from '../../data/news';
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
+const Puzzles = () => {
+  const [isCheckedPuzzle, setIsCheckedPuzzle] = useState(0);
+  const [chooseZoneIdx, setChooseZoneIdx] = useState(0);
+
+  const [puzzles, setPuzzles] = useState([
+    {id: 1, image: require('../../assets/puzzles/kidPuzzles/puzzle1.png')},
+    {id: 2, image: require('../../assets/puzzles/kidPuzzles/puzzle1.png')},
+    {id: 3, image: require('../../assets/puzzles/kidPuzzles/puzzle1.png')},
+    // {id: 4, image: require('../../assets/puzzles/kidPuzzles/puzzle1.png')},
+    // {id: 5, image: require('../../assets/puzzles/kidPuzzles/puzzle1.png')},
+    // {id: 6, image: require('../../assets/puzzles/kidPuzzles/puzzle1.png')},
+    // {id: 7, image: require('../../assets/puzzles/kidPuzzles/puzzle1.png')},
+  ]);
+
+  const handleChoose = index => {
+    console.log(index);
+    setChooseZoneIdx(index);
+  };
+
+  const checkedPuzzle = index => {
+    console.log('checkedidx', index);
+    setIsCheckedPuzzle(index);
+  };
+
+  console.log(news);
   return (
     <View style={styles.box}>
-      <View style={styles.a}></View>
+      {puzzles.map((puzzle, index) => (
+        <TouchableOpacity onPress={() => handleChoose(index)}>
+          <View
+            style={{
+              borderWidth: 2,
+              width: 50,
+              height: 50,
+              marginTop: 10,
+            }}>
+            {/* <Image style={{width: 40, height: 50}} source={puzzle.image} /> */}
+          </View>
+        </TouchableOpacity>
+      ))}
 
-      {!chooseZone && (
-        <TouchableOpacity onPress={() => setIsChecked(!isChecked)}>
+      <View>
+        {puzzles.map((item, index) => (
+          <View>
+            <Pressable onPress={() => checkedPuzzle(index)}>
+              <Image style={{width: 50, height: 50}} source={item.image} />
+            </Pressable>
+          </View>
+        ))}
+
+        {checkedPuzzle === chooseZoneIdx ? (
           <Image
-            style={{width: 40, height: 40}}
-            source={require('../../assets/encyclopediaImg/tiger1.png')}
+            source={require('../../assets/puzzles/kidPuzzles/puzzle1.png')}
+          />
+        ) : (
+          <View></View>
+        )}
+
+        {/* {isCheckedPuzzle && chooseZone && (
+          <TouchableOpacity
+            onPress={() => setIsCheckedPuzzle(!isCheckedPuzzle)}>
+            <Image
+              source={require('../../assets/puzzles/kidPuzzles/puzzle1.png')}
+            />
+          </TouchableOpacity>
+        )}
+
+        <TouchableOpacity>
+          <Image
+            source={require('../../assets/puzzles/kidPuzzles/puzzle2.png')}
           />
         </TouchableOpacity>
-      )}
-      <TouchableOpacity>
-        <Image
-          style={{width: 40, height: 40}}
-          source={require('../../assets/encyclopediaImg/tiger1.png')}
-        />
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => setChooseZone(!chooseZone)}>
-        <View
-          style={{
-            borderWidth: 2,
-            width: 40,
-            height: 50,
-            marginTop: 100,
-          }}>
-          {chooseZone && (
-            <Image
-              style={{width: 40, height: 40}}
-              source={require('../../assets/encyclopediaImg/tiger1.png')}
-            />
-          )}
-        </View>
-      </TouchableOpacity>
+        <TouchableOpacity>
+          <Image
+            source={require('../../assets/puzzles/kidPuzzles/puzzle3.png')}
+          />
+        </TouchableOpacity> */}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  box: {marginTop: 50, marginLeft: 90},
-  a: {gridarea: '1/1', width: ' 0%', background: 'red', transition: '0s .2s'},
+  box: {flex: 1, alignItems: 'center', justifyContent: 'center'},
 });
 
 export default Puzzles;

@@ -19,7 +19,7 @@ const NewsFav = () => {
         {favNews.map(item => (
           <View key={item.id}>
             <Pressable style={styles.newsImage}>
-              <Image source={item.item.image} />
+              <Image source={item.image} />
             </Pressable>
             <View>
               <View
@@ -29,7 +29,7 @@ const NewsFav = () => {
                   width: 306,
                 }}>
                 <Text style={styles.newsTitle} numberOfLines={1}>
-                  {item.item.title}
+                  {item.title}
                 </Text>
               </View>
               <Pressable
@@ -40,7 +40,7 @@ const NewsFav = () => {
             </View>
 
             <Text style={styles.newsAboutText} numberOfLines={2}>
-              {item.item.aboutText}
+              {item.aboutText}
             </Text>
           </View>
         ))}
