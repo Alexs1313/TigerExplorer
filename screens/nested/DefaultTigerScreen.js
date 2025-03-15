@@ -13,8 +13,6 @@ import {useNavigation} from '@react-navigation/native';
 import {encyclopedia} from '../../data/encyclopedia';
 import Gradient from '../../components/RadialGradient';
 import GradientText from '../../components/TextGradient';
-import {useMyContext} from '../../context/FavContext';
-import {reserves} from '../../data/reserves';
 import EncyclopediaTigerCard from '../../components/EncyclopediaTigerCard';
 
 const DefaultTigersScreen = () => {
@@ -57,7 +55,7 @@ const DefaultTigersScreen = () => {
         style={{paddingHorizontal: 16}}
         showsHorizontalScrollIndicator={false}>
         {encyclopedia.map((item, idx) => (
-          <EncyclopediaTigerCard item={item} />
+          <EncyclopediaTigerCard item={item} key={item.id} />
           // <View key={item.id}>
           //   <View
           //     style={{

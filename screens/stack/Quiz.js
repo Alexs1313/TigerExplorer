@@ -1,10 +1,10 @@
 import {
   Image,
-  Pressable,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
@@ -61,11 +61,11 @@ const Quiz = () => {
               }}>
               Tiger Hunting
             </Text>
-            <Pressable
+            <TouchableOpacity
               style={styles.btnContainer}
               onPress={() => navigation.navigate('HuntingQuiz')}>
               <Image source={require('../../assets/newsImg/arrow.png')} />
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
         <View>
@@ -83,11 +83,11 @@ const Quiz = () => {
               }}>
               Tigers in Winter
             </Text>
-            <Pressable
+            <TouchableOpacity
               style={styles.btnContainer}
               onPress={() => navigation.navigate('TigerInWinterQuiz')}>
               <Image source={require('../../assets/newsImg/arrow.png')} />
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
         <View>
@@ -105,11 +105,11 @@ const Quiz = () => {
               }}>
               Packs of Tigers
             </Text>
-            <Pressable
+            <TouchableOpacity
               style={styles.btnContainer}
               onPress={() => navigation.navigate('PacksOfTigersQuiz')}>
               <Image source={require('../../assets/newsImg/arrow.png')} />
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

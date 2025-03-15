@@ -21,8 +21,6 @@ const MainTigerCard = ({item}) => {
     const setFavourite = carts.find(item => item.id === selectedCard.id);
     if (!setFavourite) {
       setCarts([...carts, selectedCard]);
-
-      console.log(isSelected);
     }
     return;
   };
@@ -37,7 +35,10 @@ const MainTigerCard = ({item}) => {
           onPress={() => navigation.navigate('ReservesDetails', {item})}>
           <Image style={styles.mainImage} source={item.image} />
         </Pressable>
-        <TouchableOpacity onPress={() => addToFavourites(item)}>
+        <TouchableOpacity
+          onPress={() => {
+            addToFavourites(item);
+          }}>
           <View
             style={{
               position: 'absolute',

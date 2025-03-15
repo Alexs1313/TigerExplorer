@@ -133,7 +133,6 @@ const DefaultTabSettingsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'red',
   },
   title: {
     fontWeight: '800',

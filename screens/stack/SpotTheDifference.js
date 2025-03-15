@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -67,11 +68,11 @@ const SpotTheDifference = () => {
               }}>
               LVL 1
             </Text>
-            <Pressable
+            <TouchableOpacity
               style={styles.btnContainer}
               onPress={() => navigation.navigate('SpotLevelOne')}>
               <Image source={require('../../assets/newsImg/arrow.png')} />
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
         <View>
@@ -89,11 +90,11 @@ const SpotTheDifference = () => {
               }}>
               LVL 2
             </Text>
-            <Pressable
+            <TouchableOpacity
               style={styles.btnContainer}
               onPress={() => navigation.navigate('SpotLevelTwo')}>
               <Image source={require('../../assets/newsImg/arrow.png')} />
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
         <View>
@@ -111,11 +112,11 @@ const SpotTheDifference = () => {
               }}>
               LVL 3
             </Text>
-            <Pressable
+            <TouchableOpacity
               style={styles.btnContainer}
               onPress={() => navigation.navigate('SpotLevelThree')}>
               <Image source={require('../../assets/newsImg/arrow.png')} />
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

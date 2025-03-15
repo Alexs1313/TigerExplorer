@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
   Image,
   Pressable,
@@ -16,7 +16,6 @@ const EncyclopediaTigerCard = ({item}) => {
   const {favTiger, setFavTiger} = useMyContext();
 
   const addToFavourites = selectedCard => {
-    console.log(item);
     setIsSelected(selectedCard.id);
     const setFavourite = favTiger.find(item => item.id === selectedCard.id);
     if (!setFavourite) {
@@ -24,6 +23,26 @@ const EncyclopediaTigerCard = ({item}) => {
     }
     return;
   };
+
+  // useEffect(() => {
+  //   const fetchBooks = async () => {
+  //     try {
+  //       const cachedData = await AsyncStorage.getItem('favTiger');
+
+  //       if (cachedData !== null) {
+  //         setFavTiger(JSON.parse(cachedData));
+  //       } else {
+  //         await AsyncStorage.setItem('favTiger', JSON.stringify(favTiger));
+
+  //         setFavTiger(favTiger);
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
+
+  //   fetchBooks();
+  // }, []);
 
   return (
     <View key={item.id}>

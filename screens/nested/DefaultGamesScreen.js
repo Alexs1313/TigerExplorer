@@ -7,6 +7,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import Gradient from '../../components/RadialGradient';
@@ -49,11 +50,11 @@ const DefaultGamesScreen = () => {
               }}>
               Puzzles
             </Text>
-            <Pressable
+            <TouchableOpacity
               style={styles.btnContainer}
               onPress={() => navigation.navigate('Puzzles')}>
               <Image source={require('../../assets/newsImg/arrow.png')} />
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
         <View>
@@ -71,11 +72,11 @@ const DefaultGamesScreen = () => {
               }}>
               Spot The Difference
             </Text>
-            <Pressable
+            <TouchableOpacity
               style={styles.btnContainer}
               onPress={() => navigation.navigate('SpotTheDifference')}>
               <Image source={require('../../assets/newsImg/arrow.png')} />
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
         <View>
@@ -93,11 +94,11 @@ const DefaultGamesScreen = () => {
               }}>
               Quizzes
             </Text>
-            <Pressable
+            <TouchableOpacity
               style={styles.btnContainer}
               onPress={() => navigation.navigate('Quiz')}>
               <Image source={require('../../assets/newsImg/arrow.png')} />
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

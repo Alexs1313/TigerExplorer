@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   Pressable,
+  Animated,
 } from 'react-native';
 import {reserves} from '../../data/reserves';
 import {news} from '../../data/news';
@@ -16,30 +17,15 @@ import SegmentedControl from 'react-native-segmented-control-2';
 import {useNavigation} from '@react-navigation/native';
 
 import Gradient from '../../components/RadialGradient';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import GradientText from '../../components/TextGradient';
-import {useMyContext} from '../../context/FavContext';
+
 import MainTigerCard from '../../components/MainTigerCard';
 
 const DefaultMainScreen = () => {
   const [selectedIdx, setSelectedIdx] = useState(0);
 
-  // const [isSelected, setIsSelected] = useState(0);
-
   const navigation = useNavigation();
-  const {carts, setCarts} = useMyContext();
-
-  // const addToFavourites = selectedCard => {
-  //   // setIsSelected(selectedCard.id);
-
-  //   const setFavourite = carts.find(item => item.id === selectedCard.id);
-  //   if (!setFavourite) {
-  //     setCarts([...carts, selectedCard]);
-
-  //     console.log(isSelected);
-  //   }
-  //   return;
-  // };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -93,88 +79,8 @@ const DefaultMainScreen = () => {
           horizontal
           style={{paddingHorizontal: 16}}
           showsHorizontalScrollIndicator={false}>
-          {reserves.map((item, idx) => (
+          {reserves.map(item => (
             <MainTigerCard item={item} key={item.id} />
-
-            // <View key={item.id}>
-            //   <View
-            //     style={{
-            //       marginRight: 8,
-            //     }}>
-            //     <Pressable
-            //       onPress={() =>
-            //         navigation.navigate('ReservesDetails', {item})
-            //       }>
-            //       <Image style={styles.mainImage} source={item.image} />
-            //     </Pressable>
-            //     <TouchableOpacity onPress={() => addToFavourites(item)}>
-            //       <View
-            //         style={{
-            //           position: 'absolute',
-            //           bottom: 21,
-            //           right: 8,
-            //           width: 40,
-            //           height: 40,
-            //           backgroundColor: '#2A2A2A',
-            //           borderRadius: 100,
-            //           justifyContent: 'center',
-            //           alignItems: 'center',
-            //         }}>
-            //         {isSelected === item.id ? (
-            //           <Image
-            //             source={require('../../assets/settingsImg/checkedHeart.png')}
-            //           />
-            //         ) : (
-            //           <Image
-            //             source={require('../../assets/reservesImg/heart.png')}
-            //           />
-            //         )}
-            //       </View>
-            //     </TouchableOpacity>
-            //     <View
-            //       style={{
-            //         position: 'absolute',
-            //         borderColorColor: 'rgba(255, 255, 255, 0.8)',
-            //         paddingHorizontal: 5,
-            //         bottom: 21,
-            //       }}>
-            //       <Text style={styles.itemTitle}>{item.title} </Text>
-            //       <View style={{marginLeft: 16, marginRight: 60}}>
-            //         <View
-            //           style={{
-            //             flexDirection: 'row',
-            //             alignItems: 'center',
-            //           }}>
-            //           {
-            //             <Image
-            //               source={require('../../assets/reservesImg/map-pin.png')}
-            //             />
-            //           }
-            //           <Text
-            //             style={{
-            //               fontSize: 12,
-            //               fontWeight: '400',
-            //               color: 'rgba(255, 255, 255, 0.8)',
-            //               marginVertical: 8,
-            //               marginLeft: 4,
-            //             }}>
-            //             {item.location}
-            //           </Text>
-            //         </View>
-
-            //         <Text
-            //           style={{
-            //             fontSize: 12,
-            //             fontWeight: '400',
-            //             color: '#FFFFFF',
-            //           }}
-            //           numberOfLines={1}>
-            //           {item.aboutText}
-            //         </Text>
-            //       </View>
-            //     </View>
-            //   </View>
-            // </View>
           ))}
         </ScrollView>
       ) : (
@@ -195,11 +101,11 @@ const DefaultMainScreen = () => {
                     {item.title}
                   </Text>
                 </View>
-                <Pressable
+                <TouchableOpacity
                   style={styles.newsBtnContainer}
                   onPress={() => navigation.navigate('NewsDetails', {item})}>
                   <Image source={require('../../assets/newsImg/arrow.png')} />
-                </Pressable>
+                </TouchableOpacity>
               </View>
 
               <Text style={styles.newsAboutText} numberOfLines={2}>

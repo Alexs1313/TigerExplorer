@@ -1,4 +1,3 @@
-import {useNavigation} from '@react-navigation/native';
 import {
   Image,
   SafeAreaView,
@@ -10,7 +9,7 @@ import {
 } from 'react-native';
 import SegmentedControl from 'react-native-segmented-control-2';
 import {useMyContext} from '../../context/FavContext';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import GradientText from '../../components/TextGradient';
 import Gradient from '../../components/RadialGradient';
@@ -20,8 +19,21 @@ import GoBackButton from '../../components/GoBackButton';
 
 const Favourites = () => {
   const [selectedIdx, setSelectedIdx] = useState(0);
-
   const {carts, setCarts} = useMyContext();
+  console.log('carts', carts);
+
+  // useEffect(() => {
+  //   const loadPlaces = async () => {
+  //     const storedPlaces = await AsyncStorage.getItem('carts');
+  //     if (storedPlaces) {
+  //       setCarts(JSON.parse(storedPlaces));
+  //     } else {
+  //       setCarts(defaultPlaces);
+  //       await AsyncStorage.setItem('featuredPlaces', JSON.stringify(carts));
+  //     }
+  //   };
+  //   loadPlaces();
+  // }, []);
 
   return (
     <SafeAreaView style={styles.container}>

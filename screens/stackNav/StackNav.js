@@ -20,6 +20,9 @@ import PacksOfTigersQuiz from '../stack/PacksOfTigersQuiz';
 import SpotLevelOne from '../stack/SpotLevelOne';
 import SpotLevelTwo from '../stack/SpotLevelTwo';
 import SpotLevelThree from '../stack/SpotLevelThree';
+import PuzzlesKid from '../stack/PuzzlesKid';
+import PuzzlesTeen from '../stack/PuzzlesTeen';
+import PuzzlesAdult from '../stack/PuzzlesAdult';
 
 const Stack = createStackNavigator();
 
@@ -52,6 +55,9 @@ const StackNav = () => {
       <Stack.Screen name="SpotLevelOne" component={SpotLevelOne} />
       <Stack.Screen name="SpotLevelTwo" component={SpotLevelTwo} />
       <Stack.Screen name="SpotLevelThree" component={SpotLevelThree} />
+      <Stack.Screen name="PuzzlesKid" component={PuzzlesKid} />
+      <Stack.Screen name="PuzzlesTeen" component={PuzzlesTeen} />
+      <Stack.Screen name="PuzzlesAdult" component={PuzzlesAdult} />
     </Stack.Navigator>
   );
 };
