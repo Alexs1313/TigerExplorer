@@ -24,6 +24,7 @@ import PuzzlesKid from '../stack/PuzzlesKid';
 import PuzzlesTeen from '../stack/PuzzlesTeen';
 import PuzzlesAdult from '../stack/PuzzlesAdult';
 import PrivacyPolicy from '../stack/PrivacyPolicy';
+import TigersFav from '../../components/TigersFav';
 
 const Stack = createStackNavigator();
 
@@ -60,6 +61,7 @@ const StackNav = () => {
       <Stack.Screen name="PuzzlesTeen" component={PuzzlesTeen} />
       <Stack.Screen name="PuzzlesAdult" component={PuzzlesAdult} />
       <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+      <Stack.Screen name="TigersFav" component={TigersFav} />
     </Stack.Navigator>
   );
 };

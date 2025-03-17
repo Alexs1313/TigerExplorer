@@ -21,11 +21,6 @@ const ReservesDetails = ({route}) => {
 
   const item = route.params;
 
-  useEffect(() => {
-    renderFavorites(item.item);
-    console.log('renderitem');
-  }, []);
-
   const addToFavorites = async item => {
     setIconColor(true);
 
@@ -79,21 +74,7 @@ const ReservesDetails = ({route}) => {
           marginTop: 10,
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <LinearGradient
-            style={{borderRadius: 100}}
-            colors={['#F2EA5C', '#E9A90C']}>
-            <TouchableOpacity
-              style={{
-                width: 32,
-                height: 32,
-                borderRadius: 100,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              onPress={() => navigation.goBack('')}>
-              {<Image source={require('../../assets/reservesImg/arrow.png')} />}
-            </TouchableOpacity>
-          </LinearGradient>
+          <GoBackButton />
           <View
             style={{
               shadowColor: 'rgba(0, 0, 0, 0.25)',

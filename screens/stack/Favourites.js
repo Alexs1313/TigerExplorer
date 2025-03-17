@@ -16,21 +16,20 @@ import Gradient from '../../components/RadialGradient';
 import NewsFav from '../../components/NewsFav';
 import TigersFav from '../../components/TigersFav';
 import GoBackButton from '../../components/GoBackButton';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 
 const Favourites = () => {
   const [selectedIdx, setSelectedIdx] = useState(0);
-  const {carts, setCarts, fetchData} = useMyContext();
   const [storedData, setStoredData] = useState([]);
-  // console.log('cartsfavorite', carts);
-  // console.log('storeddata', storedData);
+  const [iconColor, setIconColor] = useState(0);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const addToFavorites = async item => {
       try {
-        // Retrieve the existing favorites list
         const jsonValue = await AsyncStorage.getItem('@favorites');
         let favoritesList = jsonValue != null ? JSON.parse(jsonValue) : [];
-        // console.log('favlist', favoritesList);
+
         setStoredData(favoritesList);
       } catch (e) {
         console.error('Failed to add item to favorites:', e);
@@ -38,6 +37,21 @@ const Favourites = () => {
     };
     addToFavorites();
   }, []);
+
+  const removeFavorites = async item => {
+    setIconColor(item.id);
+    const jsonValue = await AsyncStorage.getItem('@favorites');
+    let favoritesList = jsonValue != null ? JSON.parse(jsonValue) : [];
+    const filtered = favoritesList.filter(fav => fav.id !== item.id);
+    await AsyncStorage.setItem('@favorites', JSON.stringify(filtered));
+    console.log('unsaved', filtered);
+  };
+
+  // useEffect(() => {
+  //   if (selectedIdx === 2) {
+  //     navigation.navigate('PrivacyPolicy');
+  //   }
+  // }, [selectedIdx]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -88,6 +102,7 @@ const Favourites = () => {
       />
       {selectedIdx === 2 && <TigersFav />}
       {selectedIdx === 1 && <NewsFav />}
+
       {selectedIdx === 0 && (
         <ScrollView
           horizontal
@@ -101,7 +116,7 @@ const Favourites = () => {
                 }}>
                 <Image style={cart.mainImage} source={cart.image} />
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => removeFavorites(cart)}>
                   <View
                     style={{
                       position: 'absolute',
@@ -114,11 +129,15 @@ const Favourites = () => {
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}>
-                    {
+                    {iconColor === cart.id ? (
+                      <Image
+                        source={require('../../assets/reservesImg/heart.png')}
+                      />
+                    ) : (
                       <Image
                         source={require('../../assets/settingsImg/checkedHeart.png')}
                       />
-                    }
+                    )}
                   </View>
                 </TouchableOpacity>
                 <View

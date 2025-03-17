@@ -23,25 +23,17 @@ const NewsFav = () => {
 
   const fetchFavorites = async () => {
     try {
-      // Retrieve the existing favorites list
       const jsonValue = await AsyncStorage.getItem('@favoritesNews');
-      let res = jsonValue !== null ? JSON.parse(jsonValue) : [];
+      let favoritesList = jsonValue !== null ? JSON.parse(jsonValue) : [];
 
-      console.log(res);
-      // let items = [];
-      // if (res) {
-      //   console.log('resresres', res);
-      //   res.forEach(el => {
-      //     let data = news.find((val = val.id === el));
-      //     items.push(data);
-      //   });
-      //   setStored(items);
-      // } else {
-      //   setStored([]);
-      // }
-
-      console.log('@favoritesNews', res);
-      setStored(res);
+      let items = [];
+      if (favoritesList) {
+        favoritesList.forEach(el => {
+          let data = news.find(val => val.id === el.id);
+          items.push(data);
+        });
+        setStored(items);
+      }
     } catch (e) {
       console.error('Failed to add item to favorites:', e);
     }
@@ -68,7 +60,7 @@ const NewsFav = () => {
               </View>
               <Pressable
                 style={styles.newsBtnContainer}
-                onPress={() => navigation.navigate('FavNewsDetails', {item})}>
+                onPress={() => navigation.navigate('NewsDetails', {item})}>
                 <Image source={require('../assets/newsImg/arrow.png')} />
               </Pressable>
             </View>
@@ -90,7 +82,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 20,
     lineHeight: 24,
-    fontFamily: 'Montserrat',
     marginLeft: 16,
     paddingRight: 20,
   },
@@ -110,7 +101,6 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: '#FFFFFF',
     marginHorizontal: 16,
-
     paddingHorizontal: 8,
     marginBottom: 24,
   },
