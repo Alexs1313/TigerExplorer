@@ -22,14 +22,13 @@ const DefaultTabSettingsScreen = () => {
       <Gradient />
       <View
         style={{
-          shadowColor: '#000',
+          shadowColor: 'rgba(0, 0, 0, 0.25)',
           shadowOffset: {
             width: 0,
             height: 4,
           },
-          shadowOpacity: 0.1,
-          shadowRadius: 4,
-          elevation: 4,
+          shadowOpacity: 1,
+          shadowRadius: 2,
         }}>
         <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
           Settings
@@ -37,30 +36,31 @@ const DefaultTabSettingsScreen = () => {
       </View>
       <ScrollView>
         <View style={{marginHorizontal: 16}}>
-          <LinearGradient
-            colors={['#F2EA5C', '#E9A90C']}
-            style={styles.linearGradient}></LinearGradient>
+          <Pressable onPress={() => navigation.navigate('PrivacyPolicy')}>
+            <LinearGradient
+              colors={['#F2EA5C', '#E9A90C']}
+              style={styles.linearGradient}></LinearGradient>
+            <Text
+              style={{
+                position: 'absolute',
+                top: 16,
+                left: 16,
+                fontWeight: '700',
+                fontSize: 18,
 
-          <Text
-            style={{
-              position: 'absolute',
-              top: 16,
-              left: 16,
-              fontWeight: '700',
-              fontSize: 18,
-
-              color: 'rgba(42, 42, 42, 1)',
-            }}>
-            Privacy Policy
-          </Text>
-          <Image
-            style={{
-              position: 'absolute',
-              top: 2,
-              left: 190,
-            }}
-            source={require('../../assets/settingsImg/privacy.png')}
-          />
+                color: 'rgba(42, 42, 42, 1)',
+              }}>
+              Privacy Policy
+            </Text>
+            <Image
+              style={{
+                position: 'absolute',
+                top: 2,
+                left: 190,
+              }}
+              source={require('../../assets/settingsImg/privacy.png')}
+            />
+          </Pressable>
         </View>
 
         <View style={{marginHorizontal: 16}}>
@@ -68,54 +68,52 @@ const DefaultTabSettingsScreen = () => {
             <LinearGradient
               colors={['#F2EA5C', '#E9A90C']}
               style={styles.linearGradient}></LinearGradient>
+            <Text
+              style={{
+                position: 'absolute',
+                top: 16,
+                left: 16,
+                fontWeight: '700',
+                fontSize: 18,
+                color: 'rgba(42, 42, 42, 1)',
+              }}>
+              FAQ
+            </Text>
+            <Image
+              style={{
+                position: 'absolute',
+                top: 2,
+                left: 190,
+              }}
+              source={require('../../assets/settingsImg/faq.png')}
+            />
           </Pressable>
-
-          <Text
-            style={{
-              position: 'absolute',
-              top: 16,
-              left: 16,
-              fontWeight: '700',
-              fontSize: 18,
-              color: 'rgba(42, 42, 42, 1)',
-            }}>
-            FAQ
-          </Text>
-          <Image
-            style={{
-              position: 'absolute',
-              top: 2,
-              left: 190,
-            }}
-            source={require('../../assets/settingsImg/faq.png')}
-          />
         </View>
         <View style={{marginHorizontal: 16}}>
           <Pressable onPress={() => navigation.navigate('Favourites')}>
             <LinearGradient
               colors={['#F2EA5C', '#E9A90C']}
               style={styles.linearGradient}></LinearGradient>
+            <Text
+              style={{
+                position: 'absolute',
+                top: 16,
+                left: 16,
+                fontWeight: '700',
+                fontSize: 18,
+                color: 'rgba(42, 42, 42, 1)',
+              }}>
+              Favourites
+            </Text>
+            <Image
+              style={{
+                position: 'absolute',
+                top: 2,
+                left: 190,
+              }}
+              source={require('../../assets/settingsImg/faq.png')}
+            />
           </Pressable>
-
-          <Text
-            style={{
-              position: 'absolute',
-              top: 16,
-              left: 16,
-              fontWeight: '700',
-              fontSize: 18,
-              color: 'rgba(42, 42, 42, 1)',
-            }}>
-            Favourites
-          </Text>
-          <Image
-            style={{
-              position: 'absolute',
-              top: 2,
-              left: 190,
-            }}
-            source={require('../../assets/settingsImg/faq.png')}
-          />
         </View>
         <Image
           style={{

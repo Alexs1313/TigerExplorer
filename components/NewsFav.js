@@ -8,15 +8,49 @@ import {
 } from 'react-native';
 import {useMyContext} from '../context/FavContext';
 import {useNavigation} from '@react-navigation/native';
+import {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {news} from '../data/news';
 
 const NewsFav = () => {
   const {favNews} = useMyContext();
   const navigation = useNavigation();
+  const [stored, setStored] = useState([]);
+
+  useEffect(() => {
+    fetchFavorites();
+  }, []);
+
+  const fetchFavorites = async () => {
+    try {
+      // Retrieve the existing favorites list
+      const jsonValue = await AsyncStorage.getItem('@favoritesNews');
+      let res = jsonValue !== null ? JSON.parse(jsonValue) : [];
+
+      console.log(res);
+      // let items = [];
+      // if (res) {
+      //   console.log('resresres', res);
+      //   res.forEach(el => {
+      //     let data = news.find((val = val.id === el));
+      //     items.push(data);
+      //   });
+      //   setStored(items);
+      // } else {
+      //   setStored([]);
+      // }
+
+      console.log('@favoritesNews', res);
+      setStored(res);
+    } catch (e) {
+      console.error('Failed to add item to favorites:', e);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <ScrollView>
-        {favNews.map(item => (
+        {stored.map(item => (
           <View key={item.id}>
             <Pressable style={styles.newsImage}>
               <Image source={item.image} />

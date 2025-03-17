@@ -52,14 +52,13 @@ const PacksOfTigersQuiz = () => {
         <GoBackButton />
         <View
           style={{
-            shadowColor: '#000',
+            shadowColor: 'rgba(0, 0, 0, 0.25)',
             shadowOffset: {
               width: 0,
               height: 4,
             },
-            shadowOpacity: 0.1,
-            shadowRadius: 4,
-            elevation: 4,
+            shadowOpacity: 1,
+            shadowRadius: 2,
           }}>
           <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
             Packs of Tigers
@@ -74,9 +73,9 @@ const PacksOfTigersQuiz = () => {
         {quizPacksOfTigers[currentQuestionIdx].question}
       </Text>
 
-      {quizPacksOfTigers[currentQuestionIdx].options.map(option => (
+      {quizPacksOfTigers[currentQuestionIdx].options.map((option, idx) => (
         <Pressable
-          key={option.id}
+          key={idx}
           style={{}}
           onPress={() => handleOptionPress(option)}>
           {selectedOption === option ? (

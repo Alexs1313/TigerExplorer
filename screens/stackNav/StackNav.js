@@ -23,6 +23,7 @@ import SpotLevelThree from '../stack/SpotLevelThree';
 import PuzzlesKid from '../stack/PuzzlesKid';
 import PuzzlesTeen from '../stack/PuzzlesTeen';
 import PuzzlesAdult from '../stack/PuzzlesAdult';
+import PrivacyPolicy from '../stack/PrivacyPolicy';
 
 const Stack = createStackNavigator();
 
@@ -58,6 +59,7 @@ const StackNav = () => {
       <Stack.Screen name="PuzzlesKid" component={PuzzlesKid} />
       <Stack.Screen name="PuzzlesTeen" component={PuzzlesTeen} />
       <Stack.Screen name="PuzzlesAdult" component={PuzzlesAdult} />
+      <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
     </Stack.Navigator>
   );
 };

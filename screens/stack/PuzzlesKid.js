@@ -53,26 +53,7 @@ const PuzzlesKid = () => {
   const [isDisabled11, setIsDisabled11] = useState(false);
   const [isDisabled12, setIsDisabled12] = useState(false);
 
-  const [congratulation, setCongratulation] = useState(congratulations);
-  console.log(checkedView);
-  console.log(checkedView1);
-
   const navigation = useNavigation();
-
-  const checked = {
-    checkedPuzzle,
-    checkedPuzzle1,
-    checkedPuzzle2,
-    checkedPuzzle3,
-    checkedPuzzle4,
-    checkedPuzzle5,
-    checkedPuzzle6,
-    checkedPuzzle7,
-    checkedPuzzle8,
-    checkedPuzzle9,
-    checkedPuzzle10,
-    checkedPuzzle11,
-  };
 
   useEffect(() => {
     const puzzle =
@@ -160,9 +141,13 @@ const PuzzlesKid = () => {
           <GoBackButton />
           <View
             style={{
-              textShadowColor: 'rgba(0, 0, 0, 0.25)',
-              textShadowOffset: {width: 0, height: 4},
-              textShadowRadius: 4,
+              shadowColor: 'rgba(0, 0, 0, 0.25)',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 1,
+              shadowRadius: 2,
             }}>
             <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
               Kid Tiger
@@ -237,7 +222,6 @@ const PuzzlesKid = () => {
       <TouchableOpacity
         disabled={isDisabled1}
         onPress={() => {
-          console.log('checked1', checkedPuzzle);
           setCheckedPuzzle(!checkedPuzzle);
 
           setIsDisabled2(!isDisabled2);

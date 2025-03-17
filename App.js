@@ -9,8 +9,6 @@ const App = () => {
     <FavProvider>
       <NavigationContainer>
         <StackNav />
-
-        {/* <Navigation /> */}
       </NavigationContainer>
     </FavProvider>
   );

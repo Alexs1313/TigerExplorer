@@ -1,4 +1,4 @@
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {useEffect, useState} from 'react';
 import {
   Image,
@@ -8,41 +8,65 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useMyContext} from '../context/FavContext';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const EncyclopediaTigerCard = ({item}) => {
   const navigation = useNavigation();
-  const [isSelected, setIsSelected] = useState(0);
-  const {favTiger, setFavTiger} = useMyContext();
+  const [iconColor, setIconColor] = useState(false);
+  const isFocused = useIsFocused();
 
-  const addToFavourites = selectedCard => {
-    setIsSelected(selectedCard.id);
-    const setFavourite = favTiger.find(item => item.id === selectedCard.id);
-    if (!setFavourite) {
-      setFavTiger([...favTiger, selectedCard]);
+  useEffect(() => {
+    renderFavorites(item);
+  }, [isFocused]);
+
+  const addToFavorites = async item => {
+    try {
+      setIconColor(true);
+
+      const jsonValue = await AsyncStorage.getItem('@favoritesEncyclopedia');
+      let favoritesList = jsonValue != null ? JSON.parse(jsonValue) : [];
+      console.log('fav', favoritesList);
+
+      const filtered = favoritesList.find(val => val.id === item.id);
+
+      if (!filtered) {
+        favoritesList.push(item);
+      }
+
+      await AsyncStorage.setItem(
+        '@favoritesEncyclopedia',
+        JSON.stringify(favoritesList),
+      );
+
+      console.log('Item added to favorites!', favoritesList);
+    } catch (e) {
+      console.error('Failed to add item to favorites:', e);
     }
-    return;
   };
 
-  // useEffect(() => {
-  //   const fetchBooks = async () => {
-  //     try {
-  //       const cachedData = await AsyncStorage.getItem('favTiger');
+  const removeFavorites = async item => {
+    setIconColor(false);
+    const jsonValue = await AsyncStorage.getItem('@favoritesEncyclopedia');
+    let favoritesList = jsonValue != null ? JSON.parse(jsonValue) : [];
+    const filtered = favoritesList.filter(fav => fav.id !== item.id);
+    await AsyncStorage.setItem(
+      '@favoritesEncyclopedia',
+      JSON.stringify(filtered),
+    );
+    console.log('unsaved', filtered);
+  };
 
-  //       if (cachedData !== null) {
-  //         setFavTiger(JSON.parse(cachedData));
-  //       } else {
-  //         await AsyncStorage.setItem('favTiger', JSON.stringify(favTiger));
-
-  //         setFavTiger(favTiger);
-  //       }
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   fetchBooks();
-  // }, []);
+  const renderFavorites = async item => {
+    const jsonValue = await AsyncStorage.getItem('@favoritesEncyclopedia');
+    const favoritesList = JSON.parse(jsonValue);
+    console.log('favlist', favoritesList);
+    if (favoritesList !== null) {
+      let data = favoritesList.find(fav => fav.id === item.id);
+      console.log('data', data);
+      return data == null ? setIconColor(false) : setIconColor(true);
+    }
+  };
 
   return (
     <View key={item.id}>
@@ -67,8 +91,11 @@ const EncyclopediaTigerCard = ({item}) => {
               alignItems: 'center',
             }}>
             {
-              <TouchableOpacity onPress={() => addToFavourites(item)}>
-                {isSelected === item.id ? (
+              <TouchableOpacity
+                onPress={() =>
+                  iconColor ? removeFavorites(item) : addToFavorites(item)
+                }>
+                {iconColor ? (
                   <Image
                     source={require('../assets/settingsImg/checkedHeart.png')}
                   />

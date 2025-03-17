@@ -10,7 +10,7 @@ import {
 import SegmentedControl from 'react-native-segmented-control-2';
 import {useMyContext} from '../../context/FavContext';
 import {useEffect, useState} from 'react';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import GradientText from '../../components/TextGradient';
 import Gradient from '../../components/RadialGradient';
 import NewsFav from '../../components/NewsFav';
@@ -19,21 +19,25 @@ import GoBackButton from '../../components/GoBackButton';
 
 const Favourites = () => {
   const [selectedIdx, setSelectedIdx] = useState(0);
-  const {carts, setCarts} = useMyContext();
-  console.log('carts', carts);
+  const {carts, setCarts, fetchData} = useMyContext();
+  const [storedData, setStoredData] = useState([]);
+  // console.log('cartsfavorite', carts);
+  // console.log('storeddata', storedData);
 
-  // useEffect(() => {
-  //   const loadPlaces = async () => {
-  //     const storedPlaces = await AsyncStorage.getItem('carts');
-  //     if (storedPlaces) {
-  //       setCarts(JSON.parse(storedPlaces));
-  //     } else {
-  //       setCarts(defaultPlaces);
-  //       await AsyncStorage.setItem('featuredPlaces', JSON.stringify(carts));
-  //     }
-  //   };
-  //   loadPlaces();
-  // }, []);
+  useEffect(() => {
+    const addToFavorites = async item => {
+      try {
+        // Retrieve the existing favorites list
+        const jsonValue = await AsyncStorage.getItem('@favorites');
+        let favoritesList = jsonValue != null ? JSON.parse(jsonValue) : [];
+        // console.log('favlist', favoritesList);
+        setStoredData(favoritesList);
+      } catch (e) {
+        console.error('Failed to add item to favorites:', e);
+      }
+    };
+    addToFavorites();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -49,9 +53,13 @@ const Favourites = () => {
           <GoBackButton />
           <View
             style={{
-              textShadowColor: 'rgba(0, 0, 0, 0.25)',
-              textShadowOffset: {width: 0, height: 4},
-              textShadowRadius: 4,
+              shadowColor: 'rgba(0, 0, 0, 0.25)',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 1,
+              shadowRadius: 2,
             }}>
             <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
               Favourites
@@ -75,10 +83,6 @@ const Favourites = () => {
           borderRadius: 100,
           borderColor: 'rgba(0, 0, 0, 0.04)',
           borderWidth: 0.5,
-
-          textShadowColor: 'rgba(0, 0, 0, 0.04)',
-          textShadowOffset: {width: 0, height: 3},
-          textShadowRadius: 8,
         }}
         onChange={index => setSelectedIdx(index)}
       />
@@ -89,7 +93,7 @@ const Favourites = () => {
           horizontal
           style={{paddingHorizontal: 16}}
           showsHorizontalScrollIndicator={false}>
-          {carts.map((cart, idx) => (
+          {storedData.map((cart, idx) => (
             <View key={cart.id}>
               <View
                 style={{

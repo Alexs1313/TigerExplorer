@@ -7,27 +7,63 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 import GradientText from '../../components/TextGradient';
 import Gradient from '../../components/RadialGradient';
-import {useMyContext} from '../../context/FavContext';
 import GoBackButton from '../../components/GoBackButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const NewsDetails = ({route}) => {
-  const {favNews, setFavNews} = useMyContext();
+  const [iconColor, setIconColor] = useState(false);
   const item = route.params;
 
-  const [isSelected, setIsSelected] = useState(false);
+  useEffect(() => {
+    renderFavorites(item.item);
+  }, []);
 
-  const addToFavourites = selectedCard => {
-    console.log(selectedCard.item);
-    setIsSelected(true);
-    const setFavourite = favNews.find(item => item.id === selectedCard.item.id);
-    if (!setFavourite) {
-      setFavNews([...favNews, selectedCard.item]);
+  const addToFavorites = async item => {
+    setIconColor(true);
+
+    try {
+      const jsonValue = await AsyncStorage.getItem('@favoritesNews');
+      let favoritesList = jsonValue != null ? JSON.parse(jsonValue) : [];
+      console.log('fav', favoritesList);
+      const filtered = favoritesList.find(val => val.id === item.id);
+
+      if (!filtered) {
+        favoritesList.push(item);
+      }
+
+      await AsyncStorage.setItem(
+        '@favoritesNews',
+        JSON.stringify(favoritesList),
+      );
+
+      console.log('Item added to favorites!', favoritesList);
+    } catch (e) {
+      console.error('Failed to add item to favorites:', e);
     }
-    return;
+  };
+
+  const removeFavorites = async item => {
+    setIconColor(false);
+    const jsonValue = await AsyncStorage.getItem('@favoritesNews');
+    let favoritesList = jsonValue != null ? JSON.parse(jsonValue) : [];
+    const filtered = favoritesList.filter(fav => fav.id !== item.id);
+    await AsyncStorage.setItem('@favoritesNews', JSON.stringify(filtered));
+    console.log('unsaved', filtered);
+  };
+
+  const renderFavorites = async item => {
+    const jsonValue = await AsyncStorage.getItem('@favoritesNews');
+    const favoritesList = JSON.parse(jsonValue);
+    console.log('favlist', favoritesList);
+    if (favoritesList !== null) {
+      let data = favoritesList.find(fav => fav.id === item.id);
+      console.log('data', data);
+      return data == null ? setIconColor(false) : setIconColor(true);
+    }
   };
 
   return (
@@ -45,14 +81,13 @@ const NewsDetails = ({route}) => {
           <GoBackButton />
           <View
             style={{
-              shadowColor: '#000',
+              shadowColor: 'rgba(0, 0, 0, 0.25)',
               shadowOffset: {
                 width: 0,
                 height: 4,
               },
-              shadowOpacity: 0.1,
-              shadowRadius: 4,
-              elevation: 4,
+              shadowOpacity: 1,
+              shadowRadius: 2,
             }}>
             <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
               News
@@ -61,9 +96,11 @@ const NewsDetails = ({route}) => {
         </View>
 
         <TouchableOpacity
-          onPress={() => addToFavourites(item)}
+          onPress={() =>
+            iconColor ? removeFavorites(item.item) : addToFavorites(item.item)
+          }
           style={styles.heartIcon}>
-          {isSelected ? (
+          {iconColor ? (
             <Image
               source={require('../../assets/settingsImg/checkedHeart.png')}
             />

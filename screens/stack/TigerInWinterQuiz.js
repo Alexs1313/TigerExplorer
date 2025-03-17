@@ -51,14 +51,13 @@ const TigerInWinterQuiz = () => {
         <GoBackButton />
         <View
           style={{
-            shadowColor: '#000',
+            shadowColor: 'rgba(0, 0, 0, 0.25)',
             shadowOffset: {
               width: 0,
               height: 4,
             },
-            shadowOpacity: 0.1,
-            shadowRadius: 4,
-            elevation: 4,
+            shadowOpacity: 1,
+            shadowRadius: 2,
           }}>
           <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
             Tigers in Winter
@@ -73,9 +72,9 @@ const TigerInWinterQuiz = () => {
         {quizWinter[currentQuestionIdx].question}
       </Text>
 
-      {quizWinter[currentQuestionIdx].options.map(option => (
+      {quizWinter[currentQuestionIdx].options.map((option, idx) => (
         <Pressable
-          key={option.id}
+          key={idx}
           style={{}}
           onPress={() => handleOptionPress(option)}>
           {selectedOption === option ? (

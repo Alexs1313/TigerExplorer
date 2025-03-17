@@ -86,19 +86,27 @@ These adaptations not only enhance their hunting efficiency but also ensure thei
         <View
           style={{
             flexDirection: 'row',
-            textShadowColor: 'rgba(0, 0, 0, 0.25)',
-            textShadowOffset: {width: 0, height: 4},
-            textShadowRadius: 4,
           }}>
           <GoBackButton />
-          <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
-            FAQ
-          </GradientText>
+          <View
+            style={{
+              shadowColor: 'rgba(0, 0, 0, 0.25)',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 1,
+              shadowRadius: 2,
+            }}>
+            <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+              FAQ
+            </GradientText>
+          </View>
         </View>
       </View>
       <ScrollView>
         {data.map(item => (
-          <FaqQuestion item={item} />
+          <FaqQuestion item={item} key={item.id} />
         ))}
       </ScrollView>
     </SafeAreaView>
@@ -106,18 +114,16 @@ These adaptations not only enhance their hunting efficiency but also ensure thei
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: 'red'},
+  container: {flex: 1},
   title: {
     marginLeft: 16,
-
-    fontFamily: 'Montserrat',
     fontWeight: '800',
     fontSize: 28,
   },
   arrowIcon: {
     width: 32,
     height: 32,
-    backgroundColor: '#E9A90C',
+
     borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',

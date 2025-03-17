@@ -21,14 +21,13 @@ const DefaultGamesScreen = () => {
       <Gradient />
       <View
         style={{
-          shadowColor: '#000',
+          shadowColor: 'rgba(0, 0, 0, 0.25)',
           shadowOffset: {
             width: 0,
             height: 4,
           },
-          shadowOpacity: 0.1,
-          shadowRadius: 4,
-          elevation: 4,
+          shadowOpacity: 1,
+          shadowRadius: 2,
         }}>
         <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
           Tiger’s games

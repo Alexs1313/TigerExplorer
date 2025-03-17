@@ -1,5 +1,6 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
+  Alert,
   Image,
   Pressable,
   StyleSheet,
@@ -8,21 +9,60 @@ import {
   View,
 } from 'react-native';
 import {useMyContext} from '../context/FavContext';
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MainTigerCard = ({item}) => {
-  const [isSelected, setIsSelected] = useState(0);
   const navigation = useNavigation();
   const {carts, setCarts} = useMyContext();
+  const [iconColor, setIconColor] = useState(false);
+  console.log('item', item);
+  const isFocused = useIsFocused();
 
-  const addToFavourites = selectedCard => {
-    setIsSelected(selectedCard.id);
+  useEffect(() => {
+    renderFavorites(item);
+  }, [isFocused]);
 
-    const setFavourite = carts.find(item => item.id === selectedCard.id);
-    if (!setFavourite) {
-      setCarts([...carts, selectedCard]);
+  const addToFavorites = async item => {
+    try {
+      setIconColor(true);
+
+      const jsonValue = await AsyncStorage.getItem('@favorites');
+      let favoritesList = jsonValue != null ? JSON.parse(jsonValue) : [];
+      console.log('fav', favoritesList);
+
+      const filtered = favoritesList.find(val => val.id === item.id);
+
+      if (!filtered) {
+        favoritesList.push(item);
+      }
+
+      await AsyncStorage.setItem('@favorites', JSON.stringify(favoritesList));
+
+      console.log('Item added to favorites!', favoritesList);
+    } catch (e) {
+      console.error('Failed to add item to favorites:', e);
     }
-    return;
+  };
+
+  const removeFavorites = async item => {
+    setIconColor(false);
+    const jsonValue = await AsyncStorage.getItem('@favorites');
+    let favoritesList = jsonValue != null ? JSON.parse(jsonValue) : [];
+    const filtered = favoritesList.filter(fav => fav.id !== item.id);
+    await AsyncStorage.setItem('@favorites', JSON.stringify(filtered));
+    console.log('unsaved', filtered);
+  };
+
+  const renderFavorites = async item => {
+    const jsonValue = await AsyncStorage.getItem('@favorites');
+    const favoritesList = JSON.parse(jsonValue);
+    console.log('favlist', favoritesList);
+    if (favoritesList !== null) {
+      let data = favoritesList.find(fav => fav.id === item.id);
+      console.log('data', data);
+      return data == null ? setIconColor(false) : setIconColor(true);
+    }
   };
 
   return (
@@ -36,9 +76,9 @@ const MainTigerCard = ({item}) => {
           <Image style={styles.mainImage} source={item.image} />
         </Pressable>
         <TouchableOpacity
-          onPress={() => {
-            addToFavourites(item);
-          }}>
+          onPress={() =>
+            iconColor ? removeFavorites(item) : addToFavorites(item)
+          }>
           <View
             style={{
               position: 'absolute',
@@ -51,7 +91,7 @@ const MainTigerCard = ({item}) => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            {isSelected === item.id ? (
+            {iconColor ? (
               <Image
                 source={require('../assets/settingsImg/checkedHeart.png')}
               />

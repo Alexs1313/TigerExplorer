@@ -202,9 +202,13 @@ const PuzzlesTeen = () => {
           <GoBackButton />
           <View
             style={{
-              textShadowColor: 'rgba(0, 0, 0, 0.25)',
-              textShadowOffset: {width: 0, height: 4},
-              textShadowRadius: 4,
+              shadowColor: 'rgba(0, 0, 0, 0.25)',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 1,
+              shadowRadius: 2,
             }}>
             <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
               Teen Tiger

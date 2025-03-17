@@ -17,7 +17,7 @@ import SegmentedControl from 'react-native-segmented-control-2';
 import {useNavigation} from '@react-navigation/native';
 
 import Gradient from '../../components/RadialGradient';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import GradientText from '../../components/TextGradient';
 
 import MainTigerCard from '../../components/MainTigerCard';
@@ -35,14 +35,13 @@ const DefaultMainScreen = () => {
         style={{
           marginTop: 10,
           marginHorizontal: 20,
-          shadowColor: '#000',
+          shadowColor: 'rgba(0, 0, 0, 0.25)',
           shadowOffset: {
             width: 0,
             height: 4,
           },
-          shadowOpacity: 0.1,
-          shadowRadius: 4,
-          elevation: 4,
+          shadowOpacity: 1,
+          shadowRadius: 2,
         }}>
         <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
           Reserves and Volunteering

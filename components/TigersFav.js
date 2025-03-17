@@ -8,12 +8,62 @@ import {
   View,
 } from 'react-native';
 import {useMyContext} from '../context/FavContext';
-import {useState} from 'react';
-
+import {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {encyclopedia} from '../data/encyclopedia';
 const TigersFav = () => {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const navigation = useNavigation();
   const {favTiger, setFavTiger} = useMyContext();
+
+  const [storedData, setStoredData] = useState([]);
+  const [product, setProduct] = useState([]);
+  console.log('storedTiger', storedData);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const value = await AsyncStorage.getItem('tiger');
+  //       const parsed = JSON.parse(value);
+  //       console.log('parced', parsed);
+
+  //       setFavTiger(parsed);
+  //     } catch (error) {}
+  //   };
+  //   fetchData();
+  // }, []);
+
+  useEffect(() => {
+    const addToFavorites = async () => {
+      try {
+        // Retrieve the existing favorites list
+        const jsonValue = await AsyncStorage.getItem('@favoritesEncyclopedia');
+        let favoritesList = jsonValue != null ? JSON.parse(jsonValue) : [];
+
+        setStoredData(favoritesList);
+      } catch (e) {
+        console.error('Failed to add item to favorites:', e);
+      }
+    };
+    addToFavorites();
+  }, []);
+
+  // const fetchData = async () => {
+  //   let items = await AsyncStorage.getItem('@favoritesEncyclopedia');
+  //   items = JSON.parse(items);
+  //   let productData = [];
+  //   if (items) {
+  //     encyclopedia.forEach(data => {
+  //       if (items.includes(data.id)) {
+  //         productData.push(data);
+  //         return;
+  //       }
+  //     });
+  //     setProduct(productData);
+  //     console.log(productData);
+  //   } else {
+  //     setProduct(false);
+  //   }
+  // };
 
   return (
     <View style={styles.container}>
@@ -21,7 +71,7 @@ const TigersFav = () => {
         horizontal
         style={{paddingHorizontal: 16}}
         showsHorizontalScrollIndicator={false}>
-        {favTiger.map((item, idx) => (
+        {storedData.map((item, idx) => (
           <View key={item.id}>
             <View
               style={{

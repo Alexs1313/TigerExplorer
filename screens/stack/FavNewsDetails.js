@@ -11,27 +11,11 @@ import {
 import GradientText from '../../components/TextGradient';
 import Gradient from '../../components/RadialGradient';
 import {useState} from 'react';
-import {useMyContext} from '../../context/FavContext';
 
 const FavNewsDetails = ({route}) => {
-  const [selectedIdx, setSelectedIdx] = useState(0);
   const [toggleIcon, setToggleIcon] = useState(false);
   const navigation = useNavigation();
-  const {favNews, setFavNews} = useMyContext();
   const item = route.params.item;
-
-  // const addToFavouritesNews = selectedCard => {
-  //   setFavNews([...favNews, selectedCard]);
-  // };
-
-  const addToFavourites = selectedCard => {
-    favNews.map(favItem => {
-      if (favItem.id !== selectedCard.item.id) {
-        setFavNews([...favNews, selectedCard]);
-      }
-      return;
-    });
-  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -50,14 +34,23 @@ const FavNewsDetails = ({route}) => {
             onPress={() => navigation.goBack('')}>
             {<Image source={require('../../assets/reservesImg/arrow.png')} />}
           </TouchableOpacity>
-          <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
-            News
-          </GradientText>
+          <View
+            style={{
+              shadowColor: 'rgba(0, 0, 0, 0.25)',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 1,
+              shadowRadius: 2,
+            }}>
+            <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+              News
+            </GradientText>
+          </View>
         </View>
 
-        <TouchableOpacity
-          onPress={() => addToFavouritesNews(item)}
-          style={styles.heartIcon}>
+        <TouchableOpacity style={styles.heartIcon}>
           {toggleIcon ? (
             <Image source={require('../../assets/reservesImg/heart.png')} />
           ) : (
@@ -68,12 +61,12 @@ const FavNewsDetails = ({route}) => {
         </TouchableOpacity>
       </View>
       <View style={{marginHorizontal: 16, marginTop: 16, marginBottom: 24}}>
-        <Image source={item.item.image} style={styles.mainImage} />
+        <Image source={item.image} style={styles.mainImage} />
       </View>
 
       <ScrollView>
-        <Text style={styles.titleName}>{item.item.title}</Text>
-        <Text style={styles.aboutText}>{item.item.aboutText}</Text>
+        <Text style={styles.titleName}>{item.title}</Text>
+        <Text style={styles.aboutText}>{item.aboutText}</Text>
       </ScrollView>
     </SafeAreaView>
   );

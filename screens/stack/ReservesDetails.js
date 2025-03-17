@@ -1,13 +1,71 @@
 import {useNavigation} from '@react-navigation/native';
-import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import GradientText from '../../components/TextGradient';
 import Gradient from '../../components/RadialGradient';
 import GoBackButton from '../../components/GoBackButton';
+import {useEffect, useState} from 'react';
+import LinearGradient from 'react-native-linear-gradient';
 
 const ReservesDetails = ({route}) => {
   const navigation = useNavigation();
+  const [iconColor, setIconColor] = useState(false);
+
   const item = route.params;
+
+  useEffect(() => {
+    renderFavorites(item.item);
+    console.log('renderitem');
+  }, []);
+
+  const addToFavorites = async item => {
+    setIconColor(true);
+
+    try {
+      const jsonValue = await AsyncStorage.getItem('@favorites');
+      let favoritesList = jsonValue != null ? JSON.parse(jsonValue) : [];
+      console.log('fav', favoritesList);
+      const filtered = favoritesList.find(val => val.id === item.id);
+
+      if (!filtered) {
+        favoritesList.push(item);
+      }
+
+      await AsyncStorage.setItem('@favorites', JSON.stringify(favoritesList));
+
+      console.log('Item added to favorites!', favoritesList);
+    } catch (e) {
+      console.error('Failed to add item to favorites:', e);
+    }
+  };
+
+  const removeFavorites = async item => {
+    setIconColor(false);
+    const jsonValue = await AsyncStorage.getItem('@favorites');
+    let favoritesList = jsonValue != null ? JSON.parse(jsonValue) : [];
+    const filtered = favoritesList.filter(fav => fav.id !== item.id);
+    await AsyncStorage.setItem('@favorites', JSON.stringify(filtered));
+    console.log('unsaved', filtered);
+  };
+
+  const renderFavorites = async item => {
+    const jsonValue = await AsyncStorage.getItem('@favorites');
+    const favoritesList = JSON.parse(jsonValue);
+    console.log('favlist', favoritesList);
+    if (favoritesList !== null) {
+      let data = favoritesList.find(fav => fav.id === item.id);
+      console.log('data', data);
+      return data == null ? setIconColor(false) : setIconColor(true);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -21,17 +79,30 @@ const ReservesDetails = ({route}) => {
           marginTop: 10,
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <GoBackButton />
+          <LinearGradient
+            style={{borderRadius: 100}}
+            colors={['#F2EA5C', '#E9A90C']}>
+            <TouchableOpacity
+              style={{
+                width: 32,
+                height: 32,
+                borderRadius: 100,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+              onPress={() => navigation.goBack('')}>
+              {<Image source={require('../../assets/reservesImg/arrow.png')} />}
+            </TouchableOpacity>
+          </LinearGradient>
           <View
             style={{
-              shadowColor: '#000',
+              shadowColor: 'rgba(0, 0, 0, 0.25)',
               shadowOffset: {
                 width: 0,
                 height: 4,
               },
-              shadowOpacity: 0.1,
-              shadowRadius: 4,
-              elevation: 4,
+              shadowOpacity: 1,
+              shadowRadius: 2,
             }}>
             <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
               Reserve
@@ -39,9 +110,19 @@ const ReservesDetails = ({route}) => {
           </View>
         </View>
 
-        <View style={styles.heartIcon}>
-          {<Image source={require('../../assets/reservesImg/heart.png')} />}
-        </View>
+        <TouchableOpacity
+          onPress={() =>
+            iconColor ? removeFavorites(item.item) : addToFavorites(item.item)
+          }
+          style={styles.heartIcon}>
+          {iconColor ? (
+            <Image
+              source={require('../../assets/settingsImg/checkedHeart.png')}
+            />
+          ) : (
+            <Image source={require('../../assets/reservesImg/heart.png')} />
+          )}
+        </TouchableOpacity>
       </View>
       <View style={{marginHorizontal: 16, marginTop: 16, marginBottom: 24}}>
         <Image source={item.item.imageDetails} style={styles.mainImage} />

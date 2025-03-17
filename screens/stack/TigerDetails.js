@@ -4,15 +4,70 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
 import Gradient from '../../components/RadialGradient';
 import GoBackButton from '../../components/GoBackButton';
 import GradientText from '../../components/TextGradient';
+import {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const TigerDetails = ({route}) => {
+  const [iconColor, setIconColor] = useState(false);
   const item = route.params;
+
+  useEffect(() => {
+    renderFavorites(item.item);
+  }, []);
+
+  const addToFavorites = async item => {
+    setIconColor(true);
+
+    try {
+      const jsonValue = await AsyncStorage.getItem('@favoritesEncyclopedia');
+      let favoritesList = jsonValue != null ? JSON.parse(jsonValue) : [];
+      console.log('fav', favoritesList);
+      const filtered = favoritesList.find(val => val.id === item.id);
+
+      if (!filtered) {
+        favoritesList.push(item);
+      }
+
+      await AsyncStorage.setItem(
+        '@favoritesEncyclopedia',
+        JSON.stringify(favoritesList),
+      );
+
+      console.log('Item added to favorites!', favoritesList);
+    } catch (e) {
+      console.error('Failed to add item to favorites:', e);
+    }
+  };
+
+  const removeFavorites = async item => {
+    setIconColor(false);
+    const jsonValue = await AsyncStorage.getItem('@favoritesEncyclopedia');
+    let favoritesList = jsonValue != null ? JSON.parse(jsonValue) : [];
+    const filtered = favoritesList.filter(fav => fav.id !== item.id);
+    await AsyncStorage.setItem(
+      '@favoritesEncyclopedia',
+      JSON.stringify(filtered),
+    );
+    console.log('unsaved', filtered);
+  };
+
+  const renderFavorites = async item => {
+    const jsonValue = await AsyncStorage.getItem('@favoritesEncyclopedia');
+    const favoritesList = JSON.parse(jsonValue);
+    console.log('favlist', favoritesList);
+    if (favoritesList !== null) {
+      let data = favoritesList.find(fav => fav.id === item.id);
+      console.log('data', data);
+      return data == null ? setIconColor(false) : setIconColor(true);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,14 +84,13 @@ const TigerDetails = ({route}) => {
           <GoBackButton />
           <View
             style={{
-              shadowColor: '#000',
+              shadowColor: 'rgba(0, 0, 0, 0.25)',
               shadowOffset: {
                 width: 0,
                 height: 4,
               },
-              shadowOpacity: 0.1,
-              shadowRadius: 4,
-              elevation: 4,
+              shadowOpacity: 1,
+              shadowRadius: 2,
             }}>
             <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
               News
@@ -45,7 +99,19 @@ const TigerDetails = ({route}) => {
         </View>
 
         <View style={styles.heartIcon}>
-          {<Image source={require('../../assets/reservesImg/heart.png')} />}
+          <TouchableOpacity
+            onPress={() =>
+              iconColor ? removeFavorites(item.item) : addToFavorites(item.item)
+            }
+            style={styles.heartIcon}>
+            {iconColor ? (
+              <Image
+                source={require('../../assets/settingsImg/checkedHeart.png')}
+              />
+            ) : (
+              <Image source={require('../../assets/reservesImg/heart.png')} />
+            )}
+          </TouchableOpacity>
         </View>
       </View>
       <View style={{marginHorizontal: 16, marginTop: 16, marginBottom: 24}}>

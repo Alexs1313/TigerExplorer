@@ -5,6 +5,7 @@ import DefaultGamesScreen from '../screens/nested/DefaultGamesScreen';
 import DefaultTabSettingsScreen from '../screens/nested/DefaultSettings';
 import DefaultTigersScreen from '../screens/nested/DefaultTigerScreen';
 import DefaultMainScreen from '../screens/nested/DefaultMainScreen';
+import GradientText from '../components/TextGradient';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,16 +21,21 @@ export const Navigation = () => {
       }}>
       <Tab.Screen
         options={{
+          tabBarLabelStyle: {
+            fontSize: 10,
+
+            fontWeight: 600,
+            marginTop: 8,
+          },
           headerShown: false,
+
           tabBarIcon: ({focused}) => (
             <View>
-              <Image
-                source={require('../assets/tabIcons/miniHome.png')}
-                style={[
-                  styles.tabIconMain,
-                  {tintColor: focused ? '#F2EA5C' : '#fff'},
-                ]}
-              />
+              {focused ? (
+                <Image source={require('../assets/tabIcons/focusedHome.png')} />
+              ) : (
+                <Image source={require('../assets/tabIcons/home.png')} />
+              )}
             </View>
           ),
         }}
@@ -40,13 +46,15 @@ export const Navigation = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => (
-            <Image
-              source={require('../assets/tabIcons/miniTiger.png')}
-              style={[
-                styles.tabIconTigers,
-                {tintColor: focused ? '#F2EA5C' : '#fff'},
-              ]}
-            />
+            <View>
+              {focused ? (
+                <Image
+                  source={require('../assets/tabIcons/focusedTiger.png')}
+                />
+              ) : (
+                <Image source={require('../assets/tabIcons/tiger.png')} />
+              )}
+            </View>
           ),
         }}
         name="Tigers"
@@ -56,13 +64,15 @@ export const Navigation = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => (
-            <Image
-              source={require('../assets/tabIcons/miniGames.png')}
-              style={[
-                styles.tabIconGames,
-                {tintColor: focused ? '#F2EA5C' : '#fff'},
-              ]}
-            />
+            <View>
+              {focused ? (
+                <Image
+                  source={require('../assets/tabIcons/focusedGames.png')}
+                />
+              ) : (
+                <Image source={require('../assets/tabIcons/game.png')} />
+              )}
+            </View>
           ),
         }}
         name="Games"
@@ -72,13 +82,15 @@ export const Navigation = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => (
-            <Image
-              source={require('../assets/tabIcons/miniSett.png')}
-              style={[
-                styles.tabIconSettings,
-                {tintColor: focused ? '#F2EA5C' : '#fff'},
-              ]}
-            />
+            <View>
+              {focused ? (
+                <Image
+                  source={require('../assets/tabIcons/focusedSettings.png')}
+                />
+              ) : (
+                <Image source={require('../assets/tabIcons/settings.png')} />
+              )}
+            </View>
           ),
         }}
         name="Settings"
