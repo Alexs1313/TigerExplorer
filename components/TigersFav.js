@@ -31,7 +31,6 @@ const TigersFav = () => {
             items.push(data);
           });
           setStoredData(items);
-          console.log('items', items);
         }
 
         // setStoredData(favoritesList);

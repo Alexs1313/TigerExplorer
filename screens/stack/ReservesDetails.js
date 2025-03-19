@@ -12,8 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import GradientText from '../../components/TextGradient';
 import Gradient from '../../components/RadialGradient';
 import GoBackButton from '../../components/GoBackButton';
-import {useEffect, useState} from 'react';
-import LinearGradient from 'react-native-linear-gradient';
+import {useState} from 'react';
 
 const ReservesDetails = ({route}) => {
   const navigation = useNavigation();
