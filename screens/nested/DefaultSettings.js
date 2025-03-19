@@ -2,6 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import {
   Button,
   Image,
+  Linking,
   Pressable,
   SafeAreaView,
   ScrollView,
@@ -36,7 +37,12 @@ const DefaultTabSettingsScreen = () => {
       </View>
       <ScrollView>
         <View style={{marginHorizontal: 16}}>
-          <Pressable onPress={() => navigation.navigate('PrivacyPolicy')}>
+          <Pressable
+            onPress={() =>
+              Linking.openURL(
+                'https://www.termsfeed.com/live/fdafe31c-aaf6-4dd7-b929-86d2d7700f77',
+              )
+            }>
             <LinearGradient
               colors={['#F2EA5C', '#E9A90C']}
               style={styles.linearGradient}></LinearGradient>
