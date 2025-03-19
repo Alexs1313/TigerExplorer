@@ -39,7 +39,15 @@ const DefaultGamesScreen = () => {
             style={{marginHorizontal: 16}}
             source={require('../../assets/games/puzzles.png')}
           />
-          <View style={{marginTop: 8, marginHorizontal: 16, marginBottom: 24}}>
+          <View
+            style={{
+              marginTop: 8,
+              marginHorizontal: 16,
+              marginBottom: 24,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: 360,
+            }}>
             <Text
               style={{
                 marginLeft: 12,
@@ -61,7 +69,15 @@ const DefaultGamesScreen = () => {
             style={{marginHorizontal: 16}}
             source={require('../../assets/games/spot.png')}
           />
-          <View style={{marginTop: 8, marginHorizontal: 16, marginBottom: 24}}>
+          <View
+            style={{
+              marginTop: 8,
+              marginHorizontal: 16,
+              marginBottom: 24,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: 360,
+            }}>
             <Text
               style={{
                 marginLeft: 12,
@@ -83,7 +99,14 @@ const DefaultGamesScreen = () => {
             style={{marginHorizontal: 16}}
             source={require('../../assets/games/quiz.png')}
           />
-          <View style={{marginTop: 8, marginHorizontal: 16}}>
+          <View
+            style={{
+              marginTop: 8,
+              marginHorizontal: 16,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: 360,
+            }}>
             <Text
               style={{
                 marginLeft: 12,
@@ -122,9 +145,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2A2A2A',
     borderRadius: 100,
     alignItems: 'center',
-    position: 'absolute',
-    right: 12,
-    bottom: 0,
+    // position: 'absolute',
   },
 });
 

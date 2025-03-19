@@ -57,7 +57,15 @@ const SpotTheDifference = () => {
             style={{marginHorizontal: 16}}
             source={require('../../assets/spotTheDifference/main1.png')}
           />
-          <View style={{marginTop: 8, marginHorizontal: 16, marginBottom: 24}}>
+          <View
+            style={{
+              marginTop: 8,
+              marginHorizontal: 16,
+              marginBottom: 24,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: 360,
+            }}>
             <Text
               style={{
                 marginLeft: 12,
@@ -79,7 +87,15 @@ const SpotTheDifference = () => {
             style={{marginHorizontal: 16}}
             source={require('../../assets/spotTheDifference/main2.png')}
           />
-          <View style={{marginTop: 8, marginHorizontal: 16, marginBottom: 24}}>
+          <View
+            style={{
+              marginTop: 8,
+              marginHorizontal: 16,
+              marginBottom: 24,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: 360,
+            }}>
             <Text
               style={{
                 marginLeft: 12,
@@ -101,7 +117,14 @@ const SpotTheDifference = () => {
             style={{marginHorizontal: 16}}
             source={require('../../assets/spotTheDifference/main3.png')}
           />
-          <View style={{marginTop: 8, marginHorizontal: 16}}>
+          <View
+            style={{
+              marginTop: 8,
+              marginHorizontal: 16,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: 360,
+            }}>
             <Text
               style={{
                 marginLeft: 12,

@@ -42,6 +42,7 @@ const DefaultMainScreen = () => {
           },
           shadowOpacity: 1,
           shadowRadius: 2,
+          width: 300,
         }}>
         <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
           Reserves and Volunteering
@@ -92,24 +93,38 @@ const DefaultMainScreen = () => {
               <View>
                 <View
                   style={{
-                    paddingLeft: 8,
-                    marginHorizontal: 16,
-                    width: 306,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    width: 360,
                   }}>
-                  <Text style={styles.newsTitle} numberOfLines={1}>
-                    {item.title}
+                  <View
+                    style={{
+                      paddingLeft: 8,
+                      marginHorizontal: 16,
+                      width: 306,
+                    }}>
+                    <Text style={styles.newsTitle} numberOfLines={1}>
+                      {item.title}
+                    </Text>
+                  </View>
+                  <View>
+                    <TouchableOpacity
+                      style={styles.newsBtnContainer}
+                      onPress={() =>
+                        navigation.navigate('NewsDetails', {item})
+                      }>
+                      <Image
+                        source={require('../../assets/newsImg/arrow.png')}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={{width: 358}}>
+                  <Text style={styles.newsAboutText} numberOfLines={2}>
+                    {item.aboutText}
                   </Text>
                 </View>
-                <TouchableOpacity
-                  style={styles.newsBtnContainer}
-                  onPress={() => navigation.navigate('NewsDetails', {item})}>
-                  <Image source={require('../../assets/newsImg/arrow.png')} />
-                </TouchableOpacity>
               </View>
-
-              <Text style={styles.newsAboutText} numberOfLines={2}>
-                {item.aboutText}
-              </Text>
             </View>
           ))}
         </ScrollView>
@@ -176,8 +191,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#2A2A2A',
     borderRadius: 100,
     alignItems: 'center',
-    position: 'absolute',
-    right: 24,
   },
 });
 
