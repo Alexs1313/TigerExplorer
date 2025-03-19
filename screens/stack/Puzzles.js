@@ -27,120 +27,123 @@ const Puzzles = () => {
           textShadowColor: 'rgb(0, 0, 0)',
           textShadowOffset: {width: 52, height: 20},
           textShadowRadius: 10,
-        }}>
+        }}></View>
+      <View style={{alignItems: 'center'}}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <GoBackButton />
-          <View>
-            <View
-              style={{
-                shadowColor: 'rgba(0, 0, 0, 0.25)',
-                shadowOffset: {
-                  width: 0,
-                  height: 4,
-                },
-                shadowOpacity: 1,
-                shadowRadius: 2,
-              }}>
-              <GradientText
-                colors={['#F2EA5C', '#E9A90C']}
-                style={styles.title}>
-                Puzzles
-              </GradientText>
+          <View style={{width: 320}}>
+            <View>
+              <View
+                style={{
+                  shadowColor: 'rgba(0, 0, 0, 0.25)',
+                  shadowOffset: {
+                    width: 0,
+                    height: 4,
+                  },
+                  shadowOpacity: 1,
+                  shadowRadius: 2,
+                }}>
+                <GradientText
+                  colors={['#F2EA5C', '#E9A90C']}
+                  style={styles.title}>
+                  Puzzles
+                </GradientText>
+              </View>
             </View>
           </View>
         </View>
+        <ScrollView>
+          <View>
+            <Image
+              style={{marginHorizontal: 16}}
+              source={require('../../assets/spotTheDifference/main1.png')}
+            />
+            <View
+              style={{
+                marginTop: 8,
+                marginHorizontal: 16,
+                marginBottom: 24,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                width: 360,
+              }}>
+              <Text
+                style={{
+                  marginLeft: 12,
+                  fontSize: 18,
+                  fontWeight: '700',
+                  color: ' rgba(255, 255, 255, 1)',
+                }}>
+                Kid tiger
+              </Text>
+              <TouchableOpacity
+                style={styles.btnContainer}
+                onPress={() => navigation.navigate('PuzzlesKid')}>
+                <Image source={require('../../assets/newsImg/arrow.png')} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View>
+            <Image
+              style={{marginHorizontal: 16}}
+              source={require('../../assets/spotTheDifference/main2.png')}
+            />
+            <View
+              style={{
+                marginTop: 8,
+                marginHorizontal: 16,
+                marginBottom: 24,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                width: 360,
+              }}>
+              <Text
+                style={{
+                  marginLeft: 12,
+                  fontSize: 18,
+                  fontWeight: '700',
+                  color: ' rgba(255, 255, 255, 1)',
+                }}>
+                Teen tiger
+              </Text>
+              <TouchableOpacity
+                style={styles.btnContainer}
+                onPress={() => navigation.navigate('PuzzlesTeen')}>
+                <Image source={require('../../assets/newsImg/arrow.png')} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View>
+            <Image
+              style={{marginHorizontal: 16}}
+              source={require('../../assets/spotTheDifference/main3.png')}
+            />
+            <View
+              style={{
+                marginTop: 8,
+                marginHorizontal: 16,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                width: 360,
+              }}>
+              <Text
+                style={{
+                  marginLeft: 12,
+                  fontSize: 18,
+                  fontWeight: '700',
+                  color: ' rgba(255, 255, 255, 1)',
+                }}>
+                Adult tiger
+              </Text>
+              <TouchableOpacity
+                style={styles.btnContainer}
+                onPress={() => navigation.navigate('PuzzlesAdult')}>
+                <Image source={require('../../assets/newsImg/arrow.png')} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
       </View>
-      <ScrollView>
-        <View>
-          <Image
-            style={{marginHorizontal: 16}}
-            source={require('../../assets/spotTheDifference/main1.png')}
-          />
-          <View
-            style={{
-              marginTop: 8,
-              marginHorizontal: 16,
-              marginBottom: 24,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              width: 360,
-            }}>
-            <Text
-              style={{
-                marginLeft: 12,
-                fontSize: 18,
-                fontWeight: '700',
-                color: ' rgba(255, 255, 255, 1)',
-              }}>
-              Kid tiger
-            </Text>
-            <TouchableOpacity
-              style={styles.btnContainer}
-              onPress={() => navigation.navigate('PuzzlesKid')}>
-              <Image source={require('../../assets/newsImg/arrow.png')} />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View>
-          <Image
-            style={{marginHorizontal: 16}}
-            source={require('../../assets/spotTheDifference/main2.png')}
-          />
-          <View
-            style={{
-              marginTop: 8,
-              marginHorizontal: 16,
-              marginBottom: 24,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              width: 360,
-            }}>
-            <Text
-              style={{
-                marginLeft: 12,
-                fontSize: 18,
-                fontWeight: '700',
-                color: ' rgba(255, 255, 255, 1)',
-              }}>
-              Teen tiger
-            </Text>
-            <TouchableOpacity
-              style={styles.btnContainer}
-              onPress={() => navigation.navigate('PuzzlesTeen')}>
-              <Image source={require('../../assets/newsImg/arrow.png')} />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View>
-          <Image
-            style={{marginHorizontal: 16}}
-            source={require('../../assets/spotTheDifference/main3.png')}
-          />
-          <View
-            style={{
-              marginTop: 8,
-              marginHorizontal: 16,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              width: 360,
-            }}>
-            <Text
-              style={{
-                marginLeft: 12,
-                fontSize: 18,
-                fontWeight: '700',
-                color: ' rgba(255, 255, 255, 1)',
-              }}>
-              Adult tiger
-            </Text>
-            <TouchableOpacity
-              style={styles.btnContainer}
-              onPress={() => navigation.navigate('PuzzlesAdult')}>
-              <Image source={require('../../assets/newsImg/arrow.png')} />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </ScrollView>
     </SafeAreaView>
   );
 };

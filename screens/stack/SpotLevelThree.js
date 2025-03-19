@@ -81,10 +81,12 @@ const SpotLevelThree = () => {
             <Text style={styles.secondTextSuccsess}>You win</Text>
           </View>
           <View>
-            <Image
-              style={{height: 300, borderRadius: 24, width: 360}}
-              source={require('../../assets/spotTheDifference/spot3.2.png')}
-            />
+            <View style={{alignItems: 'center'}}>
+              <Image
+                style={{height: 300, borderRadius: 24, width: 360}}
+                source={require('../../assets/spotTheDifference/spot3.2.png')}
+              />
+            </View>
 
             <View style={{position: 'absolute'}}>
               <TouchableOpacity
@@ -189,7 +191,13 @@ const SpotLevelThree = () => {
           </TouchableOpacity>
         </View>
       ) : (
-        <View style={{marginHorizontal: 16, marginTop: 32, gap: 16}}>
+        <View
+          style={{
+            marginHorizontal: 16,
+            marginTop: 32,
+            gap: 16,
+            alignItems: 'center',
+          }}>
           <Image
             style={{height: 300, borderRadius: 24, width: 360}}
             source={require('../../assets/spotTheDifference/spor3.1.png')}

@@ -30,49 +30,50 @@ const DefaultMainScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Gradient />
+      <View style={{marginHorizontal: 16}}>
+        <View
+          style={{
+            marginTop: 10,
 
-      <View
-        style={{
-          marginTop: 10,
-          marginHorizontal: 20,
-          shadowColor: 'rgba(0, 0, 0, 0.25)',
-          shadowOffset: {
-            width: 0,
-            height: 4,
-          },
-          shadowOpacity: 1,
-          shadowRadius: 2,
-          width: 300,
-        }}>
-        <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
-          Reserves and Volunteering
-        </GradientText>
+            shadowColor: 'rgba(0, 0, 0, 0.25)',
+            shadowOffset: {
+              width: 0,
+              height: 4,
+            },
+            shadowOpacity: 1,
+            shadowRadius: 2,
+            width: 360,
+          }}>
+          <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+            Reserves and Volunteering
+          </GradientText>
+        </View>
+
+        <SegmentedControl
+          style={{
+            marginTop: 19,
+            marginBottom: 16,
+            backgroundColor: '#EA4A56',
+            borderRadius: 100,
+            width: '100%',
+          }}
+          activeTabColor="#fff"
+          activeTextColor="#000"
+          textStyle={{color: '#fff'}}
+          tabs={['Reserves', 'News']}
+          selectedTabStyle={{
+            borderRadius: 100,
+            borderColor: 'rgba(0, 0, 0, 0.04)',
+            borderWidth: 0.5,
+
+            textShadowColor: 'rgba(0, 0, 0, 0.04)',
+            textShadowOffset: {width: 0, height: 3},
+
+            textShadowRadius: 8,
+          }}
+          onChange={index => setSelectedIdx(index)}
+        />
       </View>
-
-      <SegmentedControl
-        style={{
-          marginTop: 19,
-          marginBottom: 16,
-          backgroundColor: '#EA4A56',
-          borderRadius: 100,
-          marginHorizontal: 16,
-        }}
-        activeTabColor="#fff"
-        activeTextColor="#000"
-        textStyle={{color: '#fff'}}
-        tabs={['Reserves', 'News']}
-        selectedTabStyle={{
-          borderRadius: 100,
-          borderColor: 'rgba(0, 0, 0, 0.04)',
-          borderWidth: 0.5,
-
-          textShadowColor: 'rgba(0, 0, 0, 0.04)',
-          textShadowOffset: {width: 0, height: 3},
-
-          textShadowRadius: 8,
-        }}
-        onChange={index => setSelectedIdx(index)}
-      />
 
       {selectedIdx === 0 ? (
         <ScrollView
@@ -85,48 +86,50 @@ const DefaultMainScreen = () => {
         </ScrollView>
       ) : (
         <ScrollView style={{marginBottom: 80}}>
-          {news.map(item => (
-            <View key={item.id}>
-              <Pressable style={styles.newsImage} width={358}>
-                <Image source={item.image} />
-              </Pressable>
-              <View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    width: 360,
-                  }}>
+          <View style={{alignItems: 'center'}}>
+            {news.map(item => (
+              <View key={item.id}>
+                <Pressable style={styles.newsImage} width={358}>
+                  <Image source={item.image} />
+                </Pressable>
+                <View>
                   <View
                     style={{
-                      paddingLeft: 8,
-                      marginHorizontal: 16,
-                      width: 306,
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      width: 360,
                     }}>
-                    <Text style={styles.newsTitle} numberOfLines={1}>
-                      {item.title}
+                    <View
+                      style={{
+                        paddingLeft: 8,
+                        marginHorizontal: 16,
+                        width: 306,
+                      }}>
+                      <Text style={styles.newsTitle} numberOfLines={1}>
+                        {item.title}
+                      </Text>
+                    </View>
+                    <View>
+                      <TouchableOpacity
+                        style={styles.newsBtnContainer}
+                        onPress={() =>
+                          navigation.navigate('NewsDetails', {item})
+                        }>
+                        <Image
+                          source={require('../../assets/newsImg/arrow.png')}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                  <View style={{width: 358}}>
+                    <Text style={styles.newsAboutText} numberOfLines={2}>
+                      {item.aboutText}
                     </Text>
                   </View>
-                  <View>
-                    <TouchableOpacity
-                      style={styles.newsBtnContainer}
-                      onPress={() =>
-                        navigation.navigate('NewsDetails', {item})
-                      }>
-                      <Image
-                        source={require('../../assets/newsImg/arrow.png')}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-                <View style={{width: 358}}>
-                  <Text style={styles.newsAboutText} numberOfLines={2}>
-                    {item.aboutText}
-                  </Text>
                 </View>
               </View>
-            </View>
-          ))}
+            ))}
+          </View>
         </ScrollView>
       )}
     </SafeAreaView>
@@ -136,6 +139,7 @@ const DefaultMainScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
   },
   linearGradient: {
     flex: 1,

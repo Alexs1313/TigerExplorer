@@ -4,6 +4,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import {useMyContext} from '../context/FavContext';
@@ -44,30 +45,40 @@ const NewsFav = () => {
       <ScrollView>
         {stored.map(item => (
           <View key={item.id}>
-            <Pressable style={styles.newsImage}>
+            <Pressable style={styles.newsImage} width={358}>
               <Image source={item.image} />
             </Pressable>
             <View>
               <View
                 style={{
-                  paddingLeft: 8,
-                  marginHorizontal: 16,
-                  width: 306,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  width: 360,
                 }}>
-                <Text style={styles.newsTitle} numberOfLines={1}>
-                  {item.title}
+                <View
+                  style={{
+                    paddingLeft: 8,
+                    marginHorizontal: 16,
+                    width: 306,
+                  }}>
+                  <Text style={styles.newsTitle} numberOfLines={1}>
+                    {item.title}
+                  </Text>
+                </View>
+                <View>
+                  <TouchableOpacity
+                    style={styles.newsBtnContainer}
+                    onPress={() => navigation.navigate('NewsDetails', {item})}>
+                    <Image source={require('../assets/newsImg/arrow.png')} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <View style={{width: 358}}>
+                <Text style={styles.newsAboutText} numberOfLines={2}>
+                  {item.aboutText}
                 </Text>
               </View>
-              <Pressable
-                style={styles.newsBtnContainer}
-                onPress={() => navigation.navigate('NewsDetails', {item})}>
-                <Image source={require('../assets/newsImg/arrow.png')} />
-              </Pressable>
             </View>
-
-            <Text style={styles.newsAboutText} numberOfLines={2}>
-              {item.aboutText}
-            </Text>
           </View>
         ))}
       </ScrollView>
@@ -76,7 +87,7 @@ const NewsFav = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1},
+  container: {flex: 1, alignItems: 'center'},
   itemTitle: {
     color: '#fff',
     fontWeight: '700',
@@ -88,6 +99,7 @@ const styles = StyleSheet.create({
   newsImage: {
     marginHorizontal: 16,
     marginBottom: 8,
+    alignItems: 'center',
   },
   newsTitle: {
     color: '#fff',
@@ -110,8 +122,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#2A2A2A',
     borderRadius: 100,
     alignItems: 'center',
-    position: 'absolute',
-    right: 24,
   },
   newsContainer: {
     padding: 20,

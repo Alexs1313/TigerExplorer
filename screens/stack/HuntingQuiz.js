@@ -59,16 +59,19 @@ const HuntingQuiz = () => {
             },
             shadowOpacity: 1,
             shadowRadius: 2,
+            width: 325,
           }}>
           <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
             Tiger Hunting
           </GradientText>
         </View>
       </View>
-      <Image
-        source={quizHunting[currentQuestionIdx].image}
-        style={{marginHorizontal: 16, marginBottom: 24}}
-      />
+      <View style={{alignItems: 'center'}}>
+        <Image
+          source={quizHunting[currentQuestionIdx].image}
+          style={{marginBottom: 24}}
+        />
+      </View>
       <Text style={styles.question}>
         {quizHunting[currentQuestionIdx].question}
       </Text>

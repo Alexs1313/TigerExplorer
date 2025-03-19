@@ -82,9 +82,11 @@ const SpotLevelOne = () => {
             <Text style={styles.secondTextSuccsess}>You win</Text>
           </View>
           <View>
-            <Image
-              source={require('../../assets/spotTheDifference/spot2.png')}
-            />
+            <View style={{alignItems: 'center'}}>
+              <Image
+                source={require('../../assets/spotTheDifference/spot2.png')}
+              />
+            </View>
 
             <View style={{position: 'absolute'}}>
               <TouchableOpacity
@@ -189,7 +191,13 @@ const SpotLevelOne = () => {
           </TouchableOpacity>
         </View>
       ) : (
-        <View style={{marginHorizontal: 16, marginTop: 32, gap: 16}}>
+        <View
+          style={{
+            marginHorizontal: 16,
+            marginTop: 32,
+            gap: 16,
+            alignItems: 'center',
+          }}>
           <Image source={require('../../assets/spotTheDifference/spot1.png')} />
 
           <View>

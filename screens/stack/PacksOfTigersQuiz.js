@@ -65,10 +65,12 @@ const PacksOfTigersQuiz = () => {
           </GradientText>
         </View>
       </View>
-      <Image
-        source={quizPacksOfTigers[currentQuestionIdx].image}
-        style={{marginHorizontal: 16, marginBottom: 24}}
-      />
+      <View style={{alignItems: 'center'}}>
+        <Image
+          source={quizPacksOfTigers[currentQuestionIdx].image}
+          style={{marginHorizontal: 16, marginBottom: 24}}
+        />
+      </View>
       <Text style={styles.question}>
         {quizPacksOfTigers[currentQuestionIdx].question}
       </Text>

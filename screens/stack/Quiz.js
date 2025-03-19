@@ -37,6 +37,7 @@ const Quiz = () => {
             },
             shadowOpacity: 1,
             shadowRadius: 2,
+            width: 320,
           }}>
           <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
             Quizzes
@@ -140,7 +141,7 @@ const Quiz = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1},
+  container: {flex: 1, alignItems: 'center'},
   title: {
     marginLeft: 16,
 

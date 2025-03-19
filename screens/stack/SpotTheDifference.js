@@ -31,7 +31,7 @@ const SpotTheDifference = () => {
         }}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <GoBackButton />
-          <View>
+          <View style={{width: 325}}>
             <View
               style={{
                 shadowColor: 'rgba(0, 0, 0, 0.25)',
@@ -147,7 +147,7 @@ const SpotTheDifference = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1},
+  container: {flex: 1, alignItems: 'center'},
   title: {
     fontWeight: '800',
     fontSize: 28,

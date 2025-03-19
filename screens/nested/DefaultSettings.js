@@ -21,22 +21,25 @@ const DefaultTabSettingsScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Gradient />
-      <View
-        style={{
-          shadowColor: 'rgba(0, 0, 0, 0.25)',
-          shadowOffset: {
-            width: 0,
-            height: 4,
-          },
-          shadowOpacity: 1,
-          shadowRadius: 2,
-        }}>
-        <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
-          Settings
-        </GradientText>
-      </View>
+      <View></View>
       <ScrollView>
-        <View style={{marginHorizontal: 16}}>
+        <View style={{alignItems: 'center'}}>
+          <View
+            style={{
+              shadowColor: 'rgba(0, 0, 0, 0.25)',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 1,
+              shadowRadius: 2,
+
+              width: 340,
+            }}>
+            <GradientText colors={['#F2EA5C', '#E9A90C']} style={styles.title}>
+              Settings
+            </GradientText>
+          </View>
           <Pressable
             onPress={() =>
               Linking.openURL(
@@ -69,7 +72,7 @@ const DefaultTabSettingsScreen = () => {
           </Pressable>
         </View>
 
-        <View style={{marginHorizontal: 16}}>
+        <View style={{marginHorizontal: 16, alignItems: 'center'}}>
           <Pressable onPress={() => navigation.navigate('FaqScreen')}>
             <LinearGradient
               colors={['#F2EA5C', '#E9A90C']}
@@ -95,7 +98,7 @@ const DefaultTabSettingsScreen = () => {
             />
           </Pressable>
         </View>
-        <View style={{marginHorizontal: 16}}>
+        <View style={{marginHorizontal: 16, alignItems: 'center'}}>
           <Pressable onPress={() => navigation.navigate('Favourites')}>
             <LinearGradient
               colors={['#F2EA5C', '#E9A90C']}
@@ -142,7 +145,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 28,
     lineHeight: 36,
-    marginLeft: 20,
+
     marginBottom: 20,
     marginTop: 10,
   },

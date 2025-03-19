@@ -155,7 +155,7 @@ const PuzzlesKid = () => {
           </View>
         </View>
       </View>
-
+      <View></View>
       <Image
         style={{marginHorizontal: 20}}
         source={require('../../assets/puzzles/kidPuzzles/puzzleBoard.png')}

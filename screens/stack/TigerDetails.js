@@ -114,7 +114,13 @@ const TigerDetails = ({route}) => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{marginHorizontal: 16, marginTop: 16, marginBottom: 24}}>
+      <View
+        style={{
+          marginHorizontal: 16,
+          marginTop: 16,
+          marginBottom: 24,
+          alignItems: 'center',
+        }}>
         <Image source={item.item.imageDetails} style={styles.mainImage} />
       </View>
 
@@ -159,7 +165,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   aboutText: {
-    marginLeft: 16,
+    marginHorizontal: 16,
     fontSize: 16,
     fontWeight: '400',
     color: '#fff',
