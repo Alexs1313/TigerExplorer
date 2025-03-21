@@ -45,7 +45,7 @@ const DefaultGamesScreen = () => {
           <View>
             <Image
               style={{marginHorizontal: 16}}
-              source={require('../../assets/games/puzzles.png')}
+              source={require('../../assets/newsImg/tiger3.png')}
             />
             <View
               style={{
@@ -55,6 +55,7 @@ const DefaultGamesScreen = () => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 width: 360,
+                alignItems: 'center',
               }}>
               <Text
                 style={{
@@ -75,7 +76,7 @@ const DefaultGamesScreen = () => {
           <View>
             <Image
               style={{marginHorizontal: 16}}
-              source={require('../../assets/games/spot.png')}
+              source={require('../../assets/encyclopediaImg/tigerDetails1.png')}
             />
             <View
               style={{
@@ -84,6 +85,7 @@ const DefaultGamesScreen = () => {
                 marginBottom: 24,
                 flexDirection: 'row',
                 justifyContent: 'space-between',
+                alignItems: 'center',
                 width: 360,
               }}>
               <Text
@@ -105,7 +107,7 @@ const DefaultGamesScreen = () => {
           <View>
             <Image
               style={{marginHorizontal: 16}}
-              source={require('../../assets/games/quiz.png')}
+              source={require('../../assets/newsImg/tiger3.png')}
             />
             <View
               style={{
@@ -114,6 +116,7 @@ const DefaultGamesScreen = () => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 width: 360,
+                alignItems: 'center',
               }}>
               <Text
                 style={{
@@ -143,16 +146,17 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     fontSize: 28,
     lineHeight: 36,
-
     marginBottom: 20,
     marginTop: 10,
   },
   btnContainer: {
-    width: 24,
-    height: 24,
+    width: 33,
+    height: 33,
     backgroundColor: '#2A2A2A',
     borderRadius: 100,
     alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 8,
     // position: 'absolute',
   },
 });

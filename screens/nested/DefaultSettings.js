@@ -127,7 +127,7 @@ const DefaultTabSettingsScreen = () => {
         <Image
           style={{
             position: 'absolute',
-            top: 357,
+            top: 420,
             left: 6,
           }}
           source={require('../../assets/settingsImg/tiger.png')}

@@ -27,12 +27,12 @@ const Gradient = () => {
             id="grad"
             cx="50%"
             cy="50%"
-            rx="50%"
+            rx="70%"
             ry="50%"
             fx="50%"
             fy="50%"
             gradientUnits="userSpaceOnUse">
-            <Stop offset="0%" stopColor="#DF9881" stopOpacity="1" />
+            <Stop offset="50%" stopColor="#DF9881" stopOpacity="1" />
             <Stop offset="100%" stopColor="#C41522" stopOpacity="1" />
           </RadialGradient>
         </Defs>

@@ -87,6 +87,7 @@ const Favourites = () => {
           marginBottom: 24,
           backgroundColor: ' rgba(234, 74, 86, 1)',
           borderRadius: 100,
+          height: 40,
           marginHorizontal: 16,
         }}
         activeTabColor="#fff"
@@ -122,8 +123,8 @@ const Favourites = () => {
                       position: 'absolute',
                       bottom: 21,
                       right: 8,
-                      width: 40,
-                      height: 40,
+                      width: 47,
+                      height: 47,
                       backgroundColor: '#2A2A2A',
                       borderRadius: 100,
                       justifyContent: 'center',
@@ -131,10 +132,12 @@ const Favourites = () => {
                     }}>
                     {iconColor === cart.id ? (
                       <Image
+                        style={{width: 30, height: 30}}
                         source={require('../../assets/reservesImg/heart.png')}
                       />
                     ) : (
                       <Image
+                        style={{width: 30, height: 30}}
                         source={require('../../assets/settingsImg/checkedHeart.png')}
                       />
                     )}

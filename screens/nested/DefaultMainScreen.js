@@ -55,6 +55,7 @@ const DefaultMainScreen = () => {
             marginBottom: 16,
             backgroundColor: '#EA4A56',
             borderRadius: 100,
+            height: 40,
             width: '100%',
           }}
           activeTabColor="#fff"
@@ -190,11 +191,13 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   newsBtnContainer: {
-    width: 24,
-    height: 24,
+    width: 33,
+    height: 33,
     backgroundColor: '#2A2A2A',
     borderRadius: 100,
     alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 8,
   },
 });
 

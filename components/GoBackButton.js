@@ -9,9 +9,9 @@ const GoBackButton = () => {
     <LinearGradient style={{borderRadius: 100}} colors={['#F2EA5C', '#E9A90C']}>
       <TouchableOpacity
         style={{
-          width: 32,
-          height: 32,
-          borderRadius: 100,
+          width: 35,
+          height: 35,
+          borderRadius: '100%',
           justifyContent: 'center',
           alignItems: 'center',
         }}
